@@ -3,7 +3,60 @@
     padding: 0;
     box-sizing: border-box;
 }
+ svg {
+  margin-bottom: -10px;
+}
 
+
+
+.container {
+  width: 80%;
+  margin-inline: auto;
+  
+}
+.navbar {
+  padding: 20px 0;
+  background-color: #c5d9d8;
+  width: 90%;
+  margin: 10px auto;
+  border-radius: 45px;
+  border: 3px dashed #fffaf5;
+  box-shadow: 5px 5px 0px rgba(169, 68, 42, 0.25);
+}
+
+.navbar-box{
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-box .menu {
+  display: flex;
+  align-items: center;
+  gap: 55px;
+}
+
+.navbar-box .menu li{
+  list-style-type: none;
+}
+
+.navbar-box .menu li a{
+  text-decoration: none;
+  color: #3d0f1c;
+  font-family: "Space Grotesk", -apple-system, sans-serif;
+  font-weight: 600;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.navbar-box .menu li a:hover{
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.navbar-box .menu li a:hover{
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+}
 :root {
     --ink: #1c1917;
     --paper: #faf6f0;
@@ -34,15 +87,20 @@ h1, .brand {
 }
 
 .site-header {
-    border-bottom: 1px solid var(--line);
-     background-color: #FAE7C9;
+    border-bottom: none;
+    background-color: #f5a3b8;
+    background-image: repeating-linear-gradient(
+        90deg,
+        #f5a3b8,
+        #f5a3b8 40px,
+        #f291a9 40px,
+        #f291a9 80px
+    );
+    padding: 1.25rem 0;
 }
-
 .site-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem 1.5rem;
+    display: block;
+    padding: 0;
 }
 
 .brand {
@@ -55,10 +113,14 @@ h1, .brand {
 .site-header nav {
     display: flex;
     gap: 2rem;
+    background-color: #5c1f30;
+    border-radius: 999px;
+    padding: 0.7rem 2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .site-header nav a {
-    color: var(--ink);
+    color: #ffffff;
     text-decoration: none;
     font-size: 0.95rem;
 }
@@ -73,6 +135,7 @@ h1, .brand {
         #f291a9 40px,
         #f291a9 80px
     );
+     padding-top: 2rem;
 }
 
 .hero-grid {
@@ -141,8 +204,12 @@ h1, .brand {
 }
 .meta-list {
     display: flex;
-    gap: 2rem;
+    justify-content: center;
+    gap: 6rem;
     margin-bottom: 1.5rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .meta-row dt {
@@ -162,23 +229,29 @@ h1, .brand {
 
 .social-links {
     display: flex;
-    gap: 0.5rem;
+    justify-content: center;
+    gap: 2rem;
     flex-wrap: wrap;
-   
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
 .social-link {
     font-family: "Space Grotesk", -apple-system, sans-serif;
     display: inline-block;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 600;
     text-decoration: none;
     color: black;
     background-color: #C5d9d8;
     border-radius: var(--radius);
-    padding: 0.5rem 1.1rem;
+    padding: 0.8rem 2.5rem;
     transition: background-color 0.2s ease;
+    border: 2px dashed #d16c85;
+ 
+    
 }
 
 .social-link:hover {
@@ -189,9 +262,10 @@ h1, .brand {
     grid-area: photo;
     align-self: center;
     position: relative;
-       display: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
+    filter: drop-shadow(0 0 25px rgba(255,255,255,0.7)) drop-shadow(0 0 45px rgba(245,163,184,0.6));
 }
 .hero-visual {
     width: 100%;
@@ -222,12 +296,22 @@ h1, .brand {
 
 .site-footer {
     padding: 1.5rem;
-    color: var(--text-muted);
+    color: #3d0f1c;
     font-size: 0.85rem;
-    border-top: 1px solid var(--line);
-    background-color: #FAE7C9;
+    border-top: 2px dashed #fffaf5;
+    background-color: #f291a9;
+    font-family: "Space Grotesk", -apple-system, sans-serif;
 }
 @media (max-width: 600px) {
+    .meta-list {
+        gap: 2rem;
+    }
+    .meta-row dd, .meta-list dd{
+        font-size: 15px;
+    }
+    .hero {
+    padding-top: 2rem;
+}
     .hero-grid {
         grid-template-columns: 1fr;
         grid-template-areas:
@@ -235,17 +319,30 @@ h1, .brand {
             "photo"
             "details";
     }
+    .navbar {
+    width: 95%;
+    padding: 5px 0;
+}
+
+.navbar-box .menu {
+    gap: 12px;
+    flex-wrap: nowrap;
+    justify-content: center;
+    font-size: 0.8rem;
+}
 
     .site-header .container {
     flex-direction: column;
     gap: 0.75rem;
     padding: 1rem 1.5rem;
+    
 }
 
 .site-header nav {
     gap: 1rem;
     flex-wrap: wrap;
     justify-content: center;
+   
 }
 
 .brand {
@@ -271,10 +368,18 @@ h1, .brand {
         justify-content: center;
     }
 
-    .social-links {
-        justify-content: center;
-          gap: 20px;
-    }
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.social-link{
+      padding: 0.8rem 1rem;
+}
+
 
 
 }
@@ -291,16 +396,35 @@ h1, .brand {
 
 
 /* Section background: pink stripes (match hero)  */
-.skills, .projects, .experience {
-    padding: 4.5rem 0;
+
+
+.skills, .experience {
+    padding: 5rem 0;
+    background-color: #c5d9d8 ;
+    position: relative;
+}
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+.projects {
+    padding: 5rem 0;
     background-color: #f5a3b8;
     background-image: repeating-linear-gradient(
-        90deg,
-        #f5a3b8,
-        #f5a3b8 40px,
-        #f291a9 40px,
-        #f291a9 80px
+        90deg, #f5a3b8, #f5a3b8 40px, #f291a9 40px, #f291a9 80px
     );
+    position: relative;
+}
+
+.skills h2, .experience h2 {
+    color: var(--ink);
+    text-shadow: none;
+}
+
+.projects h2 {
+    color: #ffffff;
+    text-shadow: 2px 2px 0px #d16c85;
 }
 
 .skills h2, .projects h2, .experience h2 {
@@ -406,7 +530,7 @@ h1, .brand {
 @media (max-width: 768px) {
     .skills-grid, .projects-grid, .experience-grid {
         grid-template-columns: 1fr;
-         gap: 3.5rem;
+         gap: 5rem;
 
     }
     .skill-card, .project-card { transform: none !important; }
@@ -442,7 +566,7 @@ h1, .brand {
     transform: translateX(-50%) rotate(-3deg);
     width: 60px;
     height: 24px;
-    background-color: #c5d9d8;
+    background-color: #ed82a6;
     opacity: 0.85;
     border-radius: 2px;
     box-shadow: 0 2px 3px rgba(0,0,0,0.15);
@@ -461,3 +585,22 @@ h1, .brand {
 }
 
 
+.wave-divider {
+    position: relative;
+    margin-top: -2px;
+    margin-bottom: -85px;
+    line-height: 0;
+}
+.wave-flip {
+    margin-top: -85px;
+    margin-bottom: 0;
+}
+
+.wave-flip svg {
+    transform: scaleY(-1);
+}
+.wave-divider svg {
+    display: block;
+    width: 100%;
+    height: 100px;
+}
