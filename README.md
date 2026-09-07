@@ -83,7 +83,7 @@ claude: width: 65vw;
 Prompt: “Cara agar di belakang bio saya ada padding, lalu luarnya ada stripes dan lakban?”
 claude: .bio{  border: 2px dashed var(--teal);}, lalu di .bio::before, bagian background-color: background-color: #c5d9d8;
 Prompt: “Saya mau ada efek love-love terbang di layar.”
-claude: tambah <div class="floating-decor"> </div> dan menambahkan @keyframes
+claude: tambah menambahkan class="floating-decor" di bagian body dan menambahkan @keyframes
 
 Namun, kode dari AI tidak selalu bisa langsung digunakan karena terkadang tidak sesuai dengan struktur kode yang saya miliki. Karena itu, saya tetap mencoba, mengecek hasilnya, dan melakukan perubahan sendiri. Salah satu contohnya adalah ketika tampilan website pada mobile mengalami masalah saat layar dimiringkan. Saya memperbaikinya sendiri dengan menyesuaikan ukuran gambar menggunakan media query.
 
