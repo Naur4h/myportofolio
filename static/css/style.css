@@ -2,11 +2,13 @@ html, body {
     max-width: 100%;
     overflow-x: hidden;
 }
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 h1, h2, h3, .brand {
     font-family: "Lexend", -apple-system, sans-serif;
 }
@@ -33,7 +35,7 @@ body {
     overflow-x: hidden;
     
 }
-
+ /* efek LOPE LOPE -------------------------------------------------------------------------------------------*/
 .floating-decor {
     position: fixed;
     inset: 0;
@@ -88,7 +90,7 @@ h1, h2, h3, .brand {
     margin: 0 auto;
 }
 
-/* ---------------- Header / Navbar ---------------- */
+/*  Header / Navbar ---------------------------------------------------------------------------------------  */
 .site-header {
     padding: 1rem 0;
     background-color: #f5a3b8;
@@ -128,11 +130,12 @@ h1, h2, h3, .brand {
     color: #ffffff;
 }
 
-/* ---------------- Hero ---------------- */
+/*  PROFILE ------------------------------------------------------------------------------------------------------------- */
 
 .hero {
     padding: 3rem 0 4rem;
 }
+
 .hero-grid {
     display: flex;
     flex-direction: column;
@@ -185,6 +188,7 @@ h1, h2, h3, .brand {
     margin-bottom: 1.25rem;
     word-break: break-word;
 }
+
 .bio {
     position: relative;
     color: var(--maroon);
@@ -262,7 +266,7 @@ h1, h2, h3, .brand {
     color: #ffffff;
 }
 
-/* ---------------- Shared section styles ---------------- */
+/* CARD DIBAGIAN SKILL PROJECT EXPRIENCE------------------------------------------------------------------------------------ */
 
 .hero, .skills, .projects, .experience {
     padding: 3.5rem 0;
@@ -271,15 +275,7 @@ h1, h2, h3, .brand {
         90deg, #f5a3b8, #f5a3b8 40px, #f291a9 40px, #f291a9 80px
     );
 }
-.section-kicker {
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--maroon-light);
-    font-weight: 700;
-    margin-bottom: 0.4rem;
-    text-align: center;
-}
+
 .skills h2, .projects h2, .experience h2 {
     font-size: 1.8rem;
     margin-bottom: 2rem;
@@ -364,7 +360,7 @@ h1, h2, h3, .brand {
     font-size: 0.9rem;
 }
 
-/* ---------------- Project & Experience cards ---------------- */
+/* Project & Experience cards --------------------------------------------------------------------------------------------- */
 .projects-grid, .experience-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -446,7 +442,7 @@ h1, h2, h3, .brand {
     transform: translateY(-2px);
 }
 
-/* ---------------- Footer ---------------- */
+/*  FOOTER FOOTER FOOTER FOOTER  */
 .site-footer {
     padding: 1.5rem;
     color: var(--maroon);
@@ -457,7 +453,7 @@ h1, h2, h3, .brand {
     font-family: "Lexend", sans-serif;
 }
 
-/* ---------------- Responsive: tablet and up ---------------- */
+/* Responsive versi 700px */
 @media (min-width: 700px) {
     .hero-grid {
         flex-direction: row;
@@ -514,7 +510,7 @@ h1, h2, h3, .brand {
     }
 }
 
-/* ---------------- Safety net for short/landscape viewports ---------------- */
+/* RESPONSIVE untuk mode 480px */
 @media (max-height: 480px) and (orientation: landscape) {
     .hero {
         padding: 1.5rem 0 2rem;
