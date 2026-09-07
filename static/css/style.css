@@ -10,6 +10,8 @@ html, body {
 h1, h2, h3, .brand {
     font-family: "Lexend", -apple-system, sans-serif;
 }
+
+
 :root {
     --ink: #1c1917;
     --paper: #faf6f0;
@@ -29,6 +31,49 @@ body {
     background-color: var(--paper);
     line-height: 1.6;
     overflow-x: hidden;
+}
+
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+.floating-decor {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.float-item {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.5rem;
+    animation: float-up linear infinite;
+}
+
+.float-item:nth-child(1) { left: 5%;  animation-duration: 18s; animation-delay: 0s;  font-size: 1.2rem; }
+.float-item:nth-child(2) { left: 18%; animation-duration: 14s; animation-delay: 3s;  font-size: 1.6rem; color: rgba(93, 31, 48, 0.15); }
+.float-item:nth-child(3) { left: 34%; animation-duration: 20s; animation-delay: 6s;  font-size: 1.3rem; }
+.float-item:nth-child(4) { left: 50%; animation-duration: 16s; animation-delay: 1s;  font-size: 1.8rem; color: rgba(93, 31, 48, 0.15); }
+.float-item:nth-child(5) { left: 65%; animation-duration: 19s; animation-delay: 8s;  font-size: 1.4rem; }
+.float-item:nth-child(6) { left: 78%; animation-duration: 15s; animation-delay: 4s;  font-size: 1.6rem; color: rgba(93, 31, 48, 0.15); }
+.float-item:nth-child(7) { left: 88%; animation-duration: 17s; animation-delay: 10s; font-size: 1.3rem; }
+.float-item:nth-child(8) { left: 95%; animation-duration: 13s; animation-delay: 2s;  font-size: 1.5rem; color: rgba(93, 31, 48, 0.15); }
+
+@keyframes float-up {
+    0% {
+        bottom: -10%;
+        transform: translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% {
+        bottom: 110%;
+        transform: translateX(30px) rotate(360deg);
+        opacity: 0;
+    }
 }
 
 h1, h2, h3, .brand {
@@ -98,8 +143,8 @@ h1, h2, h3, .brand {
     flex-shrink: 0;
 }
 .foto {
-    width: 75vw;
-    max-width: 400px;
+    width: 55vw;
+    max-width: 240px;
     aspect-ratio: 1 / 1;
     display: block;
     object-fit: contain;
@@ -120,14 +165,7 @@ h1, h2, h3, .brand {
     flex-direction: column;
     align-items: center;
 }
-.hero-text h1 {
-    font-size: clamp(1.8rem, 6vw, 3rem);
-    line-height: 1.05;
-    color: #ffffff;
-    text-shadow: 2px 2px 0px #d16c85;
-    margin-bottom: 1.25rem;
-    white-space: nowrap;
-}
+
 .hero-kicker {
     font-size: 0.8rem;
     letter-spacing: 0.08em;
@@ -138,13 +176,13 @@ h1, h2, h3, .brand {
 }
 
 .hero-text h1 {
-    font-size: clamp(2rem, 8vw, 3.2rem);
+    font-size: clamp(1.8rem, 6vw, 3rem);
     line-height: 1.05;
     color: #ffffff;
     text-shadow: 2px 2px 0px #d16c85;
     margin-bottom: 1.25rem;
+    word-break: break-word;
 }
-
 .bio {
     position: relative;
     color: var(--maroon);
@@ -423,11 +461,18 @@ h1, h2, h3, .brand {
         flex-direction: row;
         align-items: center;
         text-align: left;
+        gap: 2.5rem;
+    }
+
+    .hero-photo {
+        flex-shrink: 0;
     }
 
     .hero-text {
-        align-items: flex-start;
+        flex: 1;
+        min-width: 0;
     }
+ 
 
     .meta-list, .social-links {
         justify-content: flex-start;
@@ -459,6 +504,11 @@ h1, h2, h3, .brand {
     }
     .skill-card:hover, .project-card:hover {
         transform: rotate(0deg) translateY(-5px);
+    }
+
+      .foto {
+        width: 100%;
+        max-width: 280px;
     }
 }
 
