@@ -145,8 +145,8 @@ h1, h2, h3, .brand {
     flex-shrink: 0;
 }
 .foto {
-    width: 55vw;
-    max-width: 240px;
+    width: 65vw;
+    max-width: 320px;
     aspect-ratio: 1 / 1;
     display: block;
     object-fit: contain;
@@ -154,8 +154,8 @@ h1, h2, h3, .brand {
     border: none;
     box-shadow: none;
     transition: transform 0.3s ease;
+   
 }
-
 .foto:hover {
     transform: scale(1.05);
 }
