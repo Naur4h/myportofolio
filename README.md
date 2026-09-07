@@ -27,21 +27,16 @@ Saya menggunakan konsep **handmade scrapbook** untuk memberikan kesan yang lebih
 
 ## Cara Menjalankan Website
 
-1. Clone repository.
-2. Masuk ke folder project:
-   ```bash
-   cd myportofolio-naruah
-   ```
-3. Aktifkan virtual environment:
-   ```bash
+1. Clone repository
+2. Masuk ke folder project
+   cd myportofolio-naurah
+3. Aktifkan virtual environment
    env\Scripts\activate
-   ```
-4. Install dependencies.
-5. Jalankan server Django:
-   ```bash
+4. Install dependencies
+   pip install -r requirements.txt
+5. Jalankan server
    python manage.py runserver
-   ```
-6. Buka alamat server pada browser.
+6. Buka website melalui browser
 
 ## Struktur Halaman
 
@@ -79,7 +74,18 @@ Saya menggunakan **Claude** sebagai alat bantu selama proses pembuatan website. 
 
 Contohnya, saya bertanya mengenai cara membuat **background pink stripes**, memperbesar foto, memberikan padding dan dekorasi pada bagian bio, serta membuat efek **floating love** yang bergerak di layar. Setelah mendapatkan contoh kode dari AI, saya pelajari dan sesuaikan kembali dengan struktur website yang saya buat.
 
-AI juga membantu ketika saya membutuhkan referensi untuk beberapa bagian CSS yang sudah saya lupa. Namun, kode dari AI tidak selalu bisa langsung digunakan karena terkadang tidak sesuai dengan struktur kode yang saya miliki. Karena itu, saya tetap mencoba, mengecek hasilnya, dan melakukan perubahan sendiri. Salah satu contohnya adalah ketika tampilan website pada mobile mengalami masalah saat layar dimiringkan. Saya memperbaikinya sendiri dengan menyesuaikan ukuran gambar menggunakan media query.
+AI juga membantu ketika saya membutuhkan referensi untuk beberapa bagian CSS yang sudah saya lupa.
+Berikut beberapa contoh percakapan yang saya gunakan selama proses pembuatan website:
+Prompt: “Bagaimana cara agar backgroundnya pink stripes?”
+claude: - background-image: repeating-linear-gradient(90deg, #f5a3b8, #f5a3b8 40px, #f291a9 40px, #f291a9 80px );
+Prompt: “Bagaimana agar foto saya lebih besar?”
+claude: width: 65vw;
+Prompt: “Cara agar di belakang bio saya ada padding, lalu luarnya ada stripes dan lakban?”
+claude: .bio{  border: 2px dashed var(--teal);}, lalu di .bio::before, bagian background-color: background-color: #c5d9d8;
+Prompt: “Saya mau ada efek love-love terbang di layar.”
+claude: tambah <div class="floating-decor"> </div> dan menambahkan @keyframes
+
+Namun, kode dari AI tidak selalu bisa langsung digunakan karena terkadang tidak sesuai dengan struktur kode yang saya miliki. Karena itu, saya tetap mencoba, mengecek hasilnya, dan melakukan perubahan sendiri. Salah satu contohnya adalah ketika tampilan website pada mobile mengalami masalah saat layar dimiringkan. Saya memperbaikinya sendiri dengan menyesuaikan ukuran gambar menggunakan media query.
 
 Dari proses tersebut, saya menyadari bahwa AI lebih cocok digunakan sebagai alat bantu dan referensi. Saya tetap perlu memahami HTML dan CSS agar bisa menentukan apakah saran yang diberikan sesuai dengan kebutuhan website saya.
 
