@@ -65,6 +65,8 @@ Saya menggunakan konsep **handmade scrapbook** untuk memberikan kesan yang lebih
 
 * Mencari konsep dan tema untuk website portofolio.
 * Mulai membuat dan mengembangkan tampilan website.
+
+### 6-7 September 2026
 * Melakukan beberapa perubahan pada bio, foto, background, card, hero section, footer, responsive layout, dan menambahkan efek floating.
 * Melakukan beberapa penyesuaian tampilan melalui beberapa commit di GitHub.
 
