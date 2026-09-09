@@ -533,12 +533,17 @@ h1, h2, h3, .brand {
 
 .experience-section {
     padding: 3.5rem 0;
+    background-color: #f5a3b8;
+    background-image: repeating-linear-gradient(
+        90deg, #f5a3b8, #f5a3b8 40px, #f291a9 40px, #f291a9 80px
+    );
 }
 
 .experience-section h1 {
     margin: 0.4rem 0 1.5rem;
     font-size: 2rem;
-    color: var(--maroon);
+    color: #ffffff;
+    text-shadow: 2px 2px 0px #d16c85;
 }
 
 .experience-section .experience-grid {
