@@ -530,3 +530,51 @@ h1, h2, h3, .brand {
         font-size: 0.85rem;
     }
 }
+
+.experience-section {
+    padding: 3.5rem 0;
+}
+
+.experience-section h1 {
+    margin: 0.4rem 0 1.5rem;
+    font-size: 2rem;
+    color: var(--maroon);
+}
+
+.experience-section .experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+.experience-section .experience-card {
+    padding: 1.25rem;
+    background-color: #fffaf5;
+    border: 2px dashed var(--teal);
+    border-radius: 12px;
+}
+
+.experience-category {
+    color: var(--maroon-light);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.experience-section .experience-card h2 {
+    margin: 0.5rem 0;
+    font-size: 1.25rem;
+    color: var(--maroon);
+}
+
+.experience-description,
+.empty-state {
+    color: #6b6459;
+}
+
+.experience-status {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--maroon);
+}
