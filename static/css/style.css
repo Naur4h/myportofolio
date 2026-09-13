@@ -605,8 +605,9 @@ h1, h2, h3, .brand {
     background-color: #fffaf5;
     border: 2px dashed var(--teal);
     border-radius: 12px;
+    display: flex;
+    flex-direction: column;
 }
-
 .projects-page-card h2 {
     margin: 0.3rem 0;
     font-size: 1.2rem;
@@ -623,4 +624,5 @@ h1, h2, h3, .brand {
 .project-description {
     color: #6b6459;
     margin-bottom: 1rem;
+    flex-grow: 1;
 }
