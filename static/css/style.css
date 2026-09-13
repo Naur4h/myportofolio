@@ -583,3 +583,44 @@ h1, h2, h3, .brand {
     font-weight: 600;
     color: var(--maroon);
 }
+
+.projects-page {
+    padding: 3.5rem 0;
+}
+
+.projects-page h1 {
+    margin: 0.4rem 0 1.5rem;
+    font-size: 2rem;
+    color: var(--maroon);
+}
+
+.projects-page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+.projects-page-card {
+    padding: 1.25rem;
+    background-color: #fffaf5;
+    border: 2px dashed var(--teal);
+    border-radius: 12px;
+}
+
+.projects-page-card h2 {
+    margin: 0.3rem 0;
+    font-size: 1.2rem;
+    color: var(--maroon);
+}
+
+.project-tech {
+    color: var(--maroon-light);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.project-description {
+    color: #6b6459;
+    margin-bottom: 1rem;
+}
