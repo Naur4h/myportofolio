@@ -425,8 +425,8 @@ h1, h2, h3, .brand {
     text-decoration: none;
     font-weight: 700;
     font-size: 0.8rem;
-    color: #ffffff;
-    background-color: var(--card-accent, var(--accent));
+    color: var(--maroon);
+    background-color: var(--teal);
     padding: 0.6rem 1rem;
     border-radius: 999px;
     box-shadow: 0 3px 0px rgba(0,0,0,0.2);
@@ -434,10 +434,9 @@ h1, h2, h3, .brand {
 }
 
 .pill-btn-alt {
-    background-color: var(--maroon);
-    box-shadow: 0 3px 0px rgba(60, 20, 30, 0.4);
+    background-color: #d16c85;
+    color: #ffffff;
 }
-
 .pill-btn:hover {
     transform: translateY(-2px);
 }
