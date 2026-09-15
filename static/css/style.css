@@ -13,7 +13,6 @@ h1, h2, h3, .brand {
     font-family: "Lexend", -apple-system, sans-serif;
 }
 
-
 :root {
     --ink: #1c1917;
     --paper: #faf6f0;
@@ -33,9 +32,9 @@ body {
     background-color: var(--paper);
     line-height: 1.6;
     overflow-x: hidden;
-    
 }
- /* efek LOPE LOPE -------------------------------------------------------------------------------------------*/
+
+/* efek LOPE LOPE ------------------------------------------------------------------------------------------- */
 .floating-decor {
     position: fixed;
     inset: 0;
@@ -80,17 +79,13 @@ body {
     }
 }
 
-h1, h2, h3, .brand {
-    font-family: "Lexend", -apple-system, sans-serif;
-}
-
 .container {
     width: 90%;
     max-width: 1000px;
     margin: 0 auto;
 }
 
-/*  Header / Navbar ---------------------------------------------------------------------------------------  */
+/* Header / Navbar --------------------------------------------------------------------------------------- */
 .site-header {
     padding: 1rem 0;
     background-color: #f5a3b8;
@@ -98,6 +93,7 @@ h1, h2, h3, .brand {
         90deg, #f5a3b8, #f5a3b8 40px, #f291a9 40px, #f291a9 80px
     );
 }
+
 .navbar {
     width: 92%;
     max-width: 700px;
@@ -130,10 +126,13 @@ h1, h2, h3, .brand {
     color: #ffffff;
 }
 
-/*  PROFILE ------------------------------------------------------------------------------------------------------------- */
-
+/* PROFILE ------------------------------------------------------------------------------------------------- */
 .hero {
     padding: 3rem 0 4rem;
+    background-color: #f5a3b8;
+    background-image: repeating-linear-gradient(
+        90deg, #f5a3b8, #f5a3b8 40px, #f291a9 40px, #f291a9 80px
+    );
 }
 
 .hero-grid {
@@ -147,9 +146,10 @@ h1, h2, h3, .brand {
 .hero-photo {
     flex-shrink: 0;
 }
+
 .foto {
     width: 65vw;
-    max-width: 320px;
+    max-width: 340px;
     aspect-ratio: 1 / 1;
     display: block;
     object-fit: contain;
@@ -157,8 +157,8 @@ h1, h2, h3, .brand {
     border: none;
     box-shadow: none;
     transition: transform 0.3s ease;
-   
 }
+
 .foto:hover {
     transform: scale(1.05);
 }
@@ -192,16 +192,15 @@ h1, h2, h3, .brand {
 .bio {
     position: relative;
     color: var(--maroon);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
     background-color: #fffaf5;
     border: 2px dashed var(--teal);
     border-radius: 12px;
     padding: 1.25rem;
     box-shadow: 4px 4px 0px rgba(169, 68, 42, 0.25);
     font-family: "Lexend", sans-serif;
+    font-weight: 700;
     text-align: justify;
     margin-bottom: 1.5rem;
-    transform: rotate(-1deg);
 }
 
 .bio::before {
@@ -266,9 +265,8 @@ h1, h2, h3, .brand {
     color: #ffffff;
 }
 
-/* CARD DIBAGIAN SKILL PROJECT EXPRIENCE------------------------------------------------------------------------------------ */
-
-.hero, .skills, .projects, .experience {
+/* SKILLS ------------------------------------------------------------------------------------------------- */
+.skills {
     padding: 3.5rem 0;
     background-color: #f5a3b8;
     background-image: repeating-linear-gradient(
@@ -276,15 +274,13 @@ h1, h2, h3, .brand {
     );
 }
 
-.skills h2, .projects h2, .experience h2 {
+.skills h2 {
     font-size: 1.8rem;
     margin-bottom: 2rem;
     text-align: center;
     color: var(--maroon);
-    text-shadow: none;
 }
 
-/* ---------------- Skills ---------------- */
 .skills-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -306,6 +302,7 @@ h1, h2, h3, .brand {
 .skill-card:hover {
     transform: translateY(-4px);
 }
+
 .skill-card::before {
     content: "";
     position: absolute;
@@ -327,11 +324,9 @@ h1, h2, h3, .brand {
     margin-bottom: 1.25rem;
 }
 
-
 .skill-emoji {
     font-size: 1.5rem;
 }
-
 
 .skill-card h3 {
     color: var(--maroon);
@@ -360,60 +355,7 @@ h1, h2, h3, .brand {
     font-size: 0.9rem;
 }
 
-/* Project & Experience cards --------------------------------------------------------------------------------------------- */
-.projects-grid, .experience-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.project-card {
-    background-color: #fffaf5;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 3px solid var(--card-accent, var(--teal));
-    box-shadow: 5px 5px 0px rgba(0,0,0,0.12);
-}
-.project-card:hover {
-    transform: translateY(-5px);
-}
-
-.card-green { --card-accent: #7fb88a; }
-.card-pink  { --card-accent: #e39ab8; }
-.card-blue  { --card-accent: #7c96d1; }
-.card-dark  { --card-accent: #4a3f5e; }
-
-.project-preview {
-    width: 100%;
-    aspect-ratio: 3 / 2;
-    overflow: hidden;
-}
-
-.project-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.project-body {
-    padding: 1.25rem 1.5rem 1.5rem;
-}
-
-.project-body h3 {
-    color: var(--maroon);
-    font-size: 1.05rem;
-    margin-bottom: 0.4rem;
-}
-
-.project-body p {
-    color: #6b6459;
-    font-size: 0.9rem;
-    margin-bottom: 1.1rem;
-}
-
+/* Shared: buttons used on Projects (static-free) page ---------------------------------------------------- */
 .project-links {
     display: flex;
     gap: 0.75rem;
@@ -437,11 +379,12 @@ h1, h2, h3, .brand {
     background-color: #d16c85;
     color: #ffffff;
 }
+
 .pill-btn:hover {
     transform: translateY(-2px);
 }
 
-/*  FOOTER FOOTER FOOTER FOOTER  */
+/* FOOTER ---------------------------------------------------------------------------------------------------- */
 .site-footer {
     padding: 1.5rem;
     color: var(--maroon);
@@ -452,7 +395,7 @@ h1, h2, h3, .brand {
     font-family: "Lexend", sans-serif;
 }
 
-/* Responsive versi 700px */
+/* Responsive versi 700px --------------------------------------------------------------------------------- */
 @media (min-width: 700px) {
     .hero-grid {
         flex-direction: row;
@@ -469,7 +412,6 @@ h1, h2, h3, .brand {
         flex: 1;
         min-width: 0;
     }
- 
 
     .meta-list, .social-links {
         justify-content: flex-start;
@@ -480,36 +422,27 @@ h1, h2, h3, .brand {
         max-width: none;
     }
 
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: none;
-    }
-
-    .experience-grid {
-        grid-template-columns: repeat(3, 1fr);
-        max-width: none;
-    }
-
     .navbar .menu {
         gap: 2.5rem;
     }
-    .skill-card:nth-child(odd), .project-card:nth-child(odd) {
+
+    .skill-card:nth-child(odd) {
         transform: rotate(-1deg);
     }
-    .skill-card:nth-child(even), .project-card:nth-child(even) {
+    .skill-card:nth-child(even) {
         transform: rotate(1deg);
     }
-    .skill-card:hover, .project-card:hover {
+    .skill-card:hover {
         transform: rotate(0deg) translateY(-5px);
     }
 
-      .foto {
+    .foto {
         width: 100%;
-        max-width: 280px;
+        max-width: 340px;
     }
 }
 
-/* RESPONSIVE untuk mode 480px */
+/* RESPONSIVE untuk mode landscape pendek ------------------------------------------------------------------ */
 @media (max-height: 480px) and (orientation: landscape) {
     .hero {
         padding: 1.5rem 0 2rem;
@@ -517,7 +450,6 @@ h1, h2, h3, .brand {
 
     .foto {
         max-width: 140px;
- 
     }
 
     .hero-text h1 {
@@ -530,6 +462,7 @@ h1, h2, h3, .brand {
     }
 }
 
+/* EXPERIENCE PAGE (dinamis) -------------------------------------------------------------------------------- */
 .experience-section {
     padding: 3.5rem 0;
     background-color: #f5a3b8;
@@ -583,6 +516,7 @@ h1, h2, h3, .brand {
     color: var(--maroon);
 }
 
+/* PROJECTS PAGE (dinamis) ------------------------------------------------------------------------------------ */
 .projects-page {
     padding: 3.5rem 0;
     background-color: #f5a3b8;
@@ -612,6 +546,7 @@ h1, h2, h3, .brand {
     display: flex;
     flex-direction: column;
 }
+
 .projects-page-card h2 {
     margin: 0.3rem 0;
     font-size: 1.2rem;
