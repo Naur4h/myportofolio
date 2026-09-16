@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    {% block meta %}{% endblock meta %}
+</head>
+<body>
+<!-- efek LOPE LOPE ------------------------------------------------------------------------------------- -->
+<div class="floating-decor">
+    <span class="bubble"></span>
+    <span class="bubble"></span>
+    <span class="bubble"></span>
+    <span class="bubble"></span>
+    <span class="bubble"></span>
+    <span class="bubble"></span>
+    <span class="bubble"></span>
+    <span class="bubble"></span>
+    <span class="bubble"></span>
+    <span class="bubble"></span>
+</div>
+
+    <header class="site-header">
+        <nav class="navbar">
+            <ul class="menu">
+                <li><a href="{% url 'main:show_main' %}">Profile</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="{% url 'main:show_projects' %}">Projects</a></li>
+                <li><a href="{% url 'main:show_experience' %}">Experience</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    {% block content %}{% endblock content %}
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 {{ name }}. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

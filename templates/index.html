@@ -1,52 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="format-detection" content="telephone=no">
+{% extends "base.html" %}
+{% block meta %}
     <title>{{ name }} - Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body>
-<!-- efek LOPE LOPE ------------------------------------------------------------------------------------- -->
-<div class="floating-decor">
-    <span class="bubble"></span>
-    <span class="bubble"></span>
-    <span class="bubble"></span>
-    <span class="bubble"></span>
-    <span class="bubble"></span>
-    <span class="bubble"></span>
-    <span class="bubble"></span>
-    <span class="bubble"></span>
-    <span class="bubble"></span>
-    <span class="bubble"></span>
-</div>
-
-<!-- NAVBAR BUAT MENCET PROFIL SKILL PROJECT EXPERIENCE------------------------------------------------------------------------------- -->
-    <header class="site-header">
-            <nav class="navbar">
-                <ul class="menu">
-                    <li><a href="{% url 'main:show_main' %}">Profile</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="{% url 'main:show_projects' %}">Projects</a></li>
-                    <li><a href="{% url 'main:show_experience' %}">Experience</a></li>
-                </ul>
-            </nav>
-    </header>
-
-<!-- FOTO PRIBADI, BIO , NAMA, NPM, SOCIALS--------------------------------------------------------------------------------  -->
-
+{% endblock meta %}
+{% block content %}
     <main>
         <section class="hero" id="profile">
             <div class="container hero-grid">
-                <!-- FOTOKU YG LINGKARAN -->
                 <div class="hero-photo">
-                    <img class="foto" src="/static/img/photodesain.png" alt="Foto {{ name }}">
+                    <img class="foto" src="/static/img/pinkprofile.png" alt="Foto {{ name }}">
                 </div>
-                <!-- BIO KATA-KATA  -->
                 <div class="hero-text">
                     <p class="hero-kicker">Computer Science &middot; Universitas Indonesia</p>
                     <h1>{{ name }}</h1>
@@ -60,8 +22,7 @@
                             <dt>Program</dt>
                             <dd>{{ study_program }}</dd>
                         </div>
-                    </dl>   
-                    <!-- BAGIAN LINKEDIN, IG, EMAIL -->
+                    </dl>
                     <div class="social-links">
                         <a href="https://github.com/Naur4h" target="_blank" class="social-link">GitHub</a>
                         <a href="https://www.linkedin.com/in/naurah-claradinda-a-p-a29aba322/" target="_blank" class="social-link">LinkedIn</a>
@@ -71,12 +32,10 @@
             </div>
         </section>
 
-<!-- BUAT BAGIAN SKILLS-------------------------------------------------------------------------------------------------------------------------------------------- -->
-         <section class="skills" id="skills">
+        <section class="skills" id="skills">
             <div class="container">
-                    <h2>Skills</h2>
+                <h2>Skills</h2>
                 <div class="skills-grid">
-
                     <div class="skill-card">
                         <div class="skill-card-header">
                             <span class="skill-emoji">💻</span>
@@ -112,19 +71,8 @@
                             <span class="tag">Canva</span>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
-
     </main>
-
-<!-- FOOTER--------------------------------------------------------------------------------------------------------------------------------- -->
-    <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2026 {{ name }}. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
-        </div>
-    </footer>
-
-</body>
-</html>
+{% endblock content %}
