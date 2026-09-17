@@ -490,6 +490,7 @@ body {
     background-color: #fffaf5;
     border: 2px dashed var(--teal);
     border-radius: 12px;
+    transition: transform 0.2s ease;
 }
 
 .experience-category {
@@ -717,7 +718,7 @@ body {
 }
 
 .project-search__input:focus {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--teal);
 }
 
 @media (max-width: 600px) {
