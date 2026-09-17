@@ -36,13 +36,19 @@
             </ul>
         </nav>
     </header>
-    {% if messages %}
-    <div class="container">
-        {% for message in messages %}
-            <p class="alert-message alert-{{ message.tags }}">{{ message }}</p>
-        {% endfor %}
-    </div>
-{% endif %}
+            {% if messages %}
+                <dialog id="feedback-modal" class="delete-modal" open>
+                    {% for message in messages %}
+                        <h3 class="{% if message.tags == 'error' %}feedback-error{% else %}feedback-success{% endif %}">
+                            {% if message.tags == 'error' %}Gagal!{% else %}Berhasil!{% endif %}
+                        </h3>
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                    <div class="delete-modal-actions">
+                        <button type="button" class="button" onclick="document.getElementById('feedback-modal').close()">OK</button>
+                    </div>
+                </dialog>
+            {% endif %}
 
     {% block content %}{% endblock content %}
 

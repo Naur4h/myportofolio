@@ -9,7 +9,8 @@
                 <h1>Add New Project</h1>
                 <form method="post"
                       action="{% url 'main:create_project' %}"
-                      class="project-form">
+                      class="project-form"
+                      id="add-project-form">
                     {% csrf_token %}
                     {% for field in form %}
                         <div class="form-group">
@@ -20,9 +21,34 @@
                             {% endfor %}
                         </div>
                     {% endfor %}
-                    <button type="submit" class="button">Tambah Project</button>
+
+                    <button type="button"
+                            class="button"
+                            onclick="document.getElementById('add-project-modal').showModal()">
+                        Tambah Project
+                    </button>
                     <a href="{% url 'main:show_projects' %}" class="button button-secondary">Batal</a>
                 </form>
+
+                <dialog id="add-project-modal" class="delete-modal" {% if password_error %}open{% endif %}>
+                    <h3>Yakin ingin menambahkan proyek ini?</h3>
+                    <div class="form-group">
+                        <label for="edit_password">Password Edit</label>
+                        <input type="password"
+                            name="edit_password"
+                            id="edit_password"
+                            form="add-project-form"
+                            required
+                            class="delete-password-input">
+                        {% if password_error %}
+                            <p class="form-error">{{ password_error }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="delete-modal-actions">
+                        <button type="button" class="button button-secondary" onclick="document.getElementById('add-project-modal').close()">Tidak</button>
+                        <button type="submit" form="add-project-form" class="button">Ya, Tambah</button>
+                    </div>
+                </dialog>
             </div>
         </section>
     </main>

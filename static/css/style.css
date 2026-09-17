@@ -360,6 +360,7 @@ body {
 .project-links {
     display: flex;
     gap: 0.75rem;
+    margin-top: auto;
 }
 
 .pill-btn {
@@ -549,6 +550,8 @@ body {
     flex-direction: column;
 }
 
+
+
 .projects-page-card h2 {
     margin: 0.3rem 0;
     font-size: 1.2rem;
@@ -598,32 +601,40 @@ body {
 
 .form-group input:focus,
 .form-group textarea:focus {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--pink-dark);
 }
 
 .form-error {
     color: #b42318;
     font-size: 0.85rem;
     margin-top: 0.35rem;
+    font-weight: 600;
 }
-
 .button {
     display: inline-block;
     border: 0;
-    border-radius: var(--radius);
-    padding: 0.65rem 1rem;
-    background: var(--accent);
-    color: white;
+    border-radius: 999px;
+    padding: 0.65rem 1.5rem;
+    background: var(--teal);
+    color: var(--maroon);
     cursor: pointer;
     font: inherit;
     font-weight: 700;
     text-decoration: none;
+    box-shadow: 0 3px 0px rgba(0,0,0,0.2);
+    transition: transform 0.15s ease, background-color 0.2s ease;
 }
 
 .button-secondary {
     background: var(--teal);
     color: var(--maroon);
     border: none;
+}
+
+.button:hover {
+    background: #d16c85;
+    color: #ffffff;
+    transform: translateY(-2px);
 }
 
 .button-secondary:hover {
@@ -661,7 +672,8 @@ body {
 .project-image {
     display: block;
     width: 100%;
-    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
     border-radius: var(--radius);
     margin-bottom: 0.75rem;
 }
@@ -743,22 +755,17 @@ body {
 }
 
 .alert-message {
-    padding: 0.75rem 1rem;
-    border-radius: var(--radius);
     margin: 1rem 0;
     font-weight: 600;
 }
 
+
 .alert-error {
-    background-color: #fde2e1;
     color: #b42318;
-    border: 2px solid #b42318;
 }
 
 .alert-success {
-    background-color: #d4f4dd;
     color: #1e6b3c;
-    border: 2px solid #1e6b3c;
 }
 .delete-modal {
     position: fixed;
@@ -800,10 +807,11 @@ body {
     font-size: 1.15rem;
 }
 
-.delete-modal p {
+.delete-modal p:not(.form-error) {
     color: #6b6459;
     margin-bottom: 1rem;
 }
+
 
 .delete-password-input {
     width: 100%;
@@ -831,4 +839,12 @@ body {
 .project-card-delete-trigger {
     margin-top: 0.75rem;
     width: 100%;
+}
+
+.feedback-success {
+    color: #1e6b3c;
+}
+
+.feedback-error {
+    color: #b42318;
 }

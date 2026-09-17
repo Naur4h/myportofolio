@@ -56,16 +56,14 @@ def show_projects(request):
         "title_query": title_query,
     }
     return render(request, "projects.html", context)
-
 def create_project(request):
     form = ProjectForm(request.POST or None)
+    password_error = None
 
     if request.method == "POST":
         if request.POST.get("edit_password") != os.getenv("EDIT_PASSWORD"):
-            messages.error(request, "Password salah!")
-            return redirect("main:show_projects")
-
-        if form.is_valid():
+            password_error = "Password salah!"
+        elif form.is_valid():
             form.save()
             messages.success(request, "Proyek baru berhasil ditambahkan!")
             return redirect("main:show_projects")
@@ -73,6 +71,7 @@ def create_project(request):
     context = {
         "name": "Naurah Claradinda",
         "form": form,
+        "password_error": password_error,
     }
     return render(request, "projects_form.html", context)
 

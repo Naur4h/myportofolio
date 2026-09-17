@@ -45,16 +45,19 @@ class ProjectForm(ModelForm):
             "code_url": URLInput(
                 attrs={
                     "placeholder": "https://github.com/username/repo",
+                    "required": False,
                 }
             ),
             "demo_url": URLInput(
                 attrs={
                     "placeholder": "https://myproject.vercel.app",
+                    "required": False,
                 }
             ),
             "thumbnail": URLInput(
                 attrs={
                     "placeholder": "https://drive.google.com/thumbnail?id=...&sz=w1000",
+                    "required": False,
                 }
             ),
         }
