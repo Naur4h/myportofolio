@@ -492,6 +492,12 @@ body {
     border: 2px dashed var(--teal);
     border-radius: 12px;
     transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.experience-description {
+    flex-grow: 1;
 }
 
 .experience-category {
@@ -614,7 +620,7 @@ body {
 .button {
     display: inline-block;
     border: 0;
-    border-radius: 999px;
+    border-radius: 25px;
     padding: 0.65rem 1.5rem;
     background: var(--teal);
     color: var(--maroon);
@@ -630,6 +636,7 @@ body {
     background: var(--teal);
     color: var(--maroon);
     border: none;
+    margin-left: 10px;
 }
 
 .button:hover {
@@ -848,4 +855,24 @@ body {
 
 .feedback-error {
     color: #b42318;
+}
+
+.experience-card .project-links {
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.experience-card .project-card-delete-trigger {
+    margin-top: 0;
+}
+
+.form-group select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.7rem;
+    border: 2px dashed var(--teal);
+    border-radius: var(--radius);
+    font: inherit;
+    background-color: #fffaf5;
+    color: var(--maroon);
 }

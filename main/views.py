@@ -5,7 +5,7 @@ from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
-from main.forms import ProjectForm
+from main.forms import ProjectForm, ExperienceForm
 from main.models import Experience, Project
 
 def show_main(request):
@@ -24,11 +24,81 @@ def show_main(request):
 
 
 def show_experience(request):
+    json_response = get_experience_json(request)
+
+    experiences = serializers.deserialize(
+        "json",
+        json_response.content.decode("utf-8"),
+    )
+    experiences = [exp.object for exp in experiences]
+
     context = {
         "name": "Naurah Claradinda",
-        "experience_list": Experience.objects.all(),
+        "experience_list": experiences,
     }
     return render(request, "experience.html", context)
+
+def get_experience_json(request):
+    experiences = Experience.objects.all()
+    experience_json = serializers.serialize("json", experiences)
+    return HttpResponse(experience_json, content_type="application/json")
+
+
+def create_experience(request):
+    form = ExperienceForm(request.POST or None)
+    password_error = None
+
+    if request.method == "POST":
+        if request.POST.get("edit_password") != os.getenv("EDIT_PASSWORD"):
+            password_error = "Password salah!"
+        elif form.is_valid():
+            form.save()
+            messages.success(request, "Pengalaman baru berhasil ditambahkan!")
+            return redirect("main:show_experience")
+
+    context = {
+        "name": "Naurah Claradinda",
+        "form": form,
+        "password_error": password_error,
+    }
+    return render(request, "experience_form.html", context)
+
+
+def update_experience(request, experience_id):
+    experience = get_object_or_404(Experience, pk=experience_id)
+    form = ExperienceForm(request.POST or None, instance=experience)
+    password_error = None
+
+    if request.method == "POST":
+        if request.POST.get("edit_password") != os.getenv("EDIT_PASSWORD"):
+            password_error = "Password salah!"
+        elif form.is_valid():
+            form.save()
+            messages.success(request, "Pengalaman berhasil diperbarui!")
+            return redirect("main:show_experience")
+
+    context = {
+        "name": "Naurah Claradinda",
+        "form": form,
+        "password_error": password_error,
+        "experience": experience,
+    }
+    return render(request, "experience_form.html", context)
+
+
+def delete_experience(request, experience_id):
+    experience = get_object_or_404(Experience, pk=experience_id)
+
+    if request.method == "POST":
+        if request.POST.get("edit_password") != os.getenv("EDIT_PASSWORD"):
+            messages.error(request, "Password salah!")
+            return redirect("main:show_experience")
+
+        experience.delete()
+        messages.success(request, "Pengalaman berhasil dihapus!")
+        return redirect("main:show_experience")
+
+    return redirect("main:show_experience")
 
 def get_projects_json(request):
     title_query = request.GET.get("title", "").strip()

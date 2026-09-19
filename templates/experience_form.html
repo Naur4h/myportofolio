@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block meta %}
+    {% if experience %}
+        <title>Edit Experience - {{ name }}</title>
+    {% else %}
+        <title>Add Experience - {{ name }}</title>
+    {% endif %}
+{% endblock meta %}
+{% block content %}
+    <main>
+        <section class="projects-page">
+            <div class="container">
+                {% if experience %}
+                    <h1>Edit Experience</h1>
+                {% else %}
+                    <h1>Add New Experience</h1>
+                {% endif %}
+
+                <form method="post"
+                      action="{% if experience %}{% url 'main:update_experience' experience.id %}{% else %}{% url 'main:create_experience' %}{% endif %}"
+                      class="project-form"
+                      id="experience-form">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+                            {% for error in field.errors %}
+                                <p class="form-error">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+
+                    <button type="button"
+                            class="button"
+                            onclick="document.getElementById('experience-confirm-modal').showModal()">
+                        {% if experience %}Simpan Perubahan{% else %}Tambah Experience{% endif %}
+                    </button>
+                    <a href="{% url 'main:show_experience' %}" class="button button-secondary">Batal</a>
+                </form>
+
+                <dialog id="experience-confirm-modal" class="delete-modal" {% if password_error %}open{% endif %}>
+                    <h3>
+                        {% if experience %}
+                            Yakin ingin menyimpan perubahan?
+                        {% else %}
+                            Yakin ingin menambahkan pengalaman ini?
+                        {% endif %}
+                    </h3>
+                    <div class="form-group">
+                        <label for="edit_password">Password Edit</label>
+                        <input type="password"
+                               name="edit_password"
+                               id="edit_password"
+                               form="experience-form"
+                               required
+                               class="delete-password-input">
+                        {% if password_error %}
+                            <p class="form-error">{{ password_error }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="delete-modal-actions">
+                        <button type="button" class="button button-secondary" onclick="document.getElementById('experience-confirm-modal').close()">Tidak</button>
+                        <button type="submit" form="experience-form" class="button">Ya</button>
+                    </div>
+                </dialog>
+            </div>
+        </section>
+    </main>
+{% endblock content %}
