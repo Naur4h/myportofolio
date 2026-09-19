@@ -134,3 +134,54 @@ Selain itu, AI membantu saya memahami perbedaan antara database lokal (SQLite) d
 2. Data sebaiknya disimpan dalam model karena model merepresentasikan struktur data yang konsisten dan bisa dikelola tanpa perlu menyentuh kode HTML. Jika data ditulis langsung di template, setiap kali saya ingin menambah atau mengubah project, saya harus mengedit file HTML secara manual, sama seperti pada Tugas 1 saat website masih berupa static web. Dengan model, saya cukup menambahkan data lewat Django Admin atau shell, dan perubahan tersebut otomatis muncul di halaman tanpa perlu mengubah struktur template. Ini juga membuat aplikasi lebih mudah dikembangkan ke depannya, misalnya jika suatu saat saya ingin menambahkan fitur pencarian atau filter berdasarkan tech stack, karena data sudah terstruktur di database, bukan tersebar di berbagai bagian HTML.
 
 3. `makemigrations` digunakan untuk membuat berkas migrasi, yaitu instruksi terjadwal yang mencatat perubahan pada model (seperti penambahan field atau model baru) tanpa langsung menerapkannya ke database. Sementara itu, `migrate` digunakan untuk benar-benar menerapkan instruksi dari berkas migrasi tersebut ke database yang sedang digunakan. Contoh nyata yang saya alami adalah ketika saya menambahkan model `Project` baru dengan field seperti `title`, `description`, `tech_stack`, `code_url`, dan `demo_url`. Setelah menuliskan model tersebut di `models.py`, saya menjalankan `python manage.py makemigrations` untuk membuat berkas migrasi yang mendeskripsikan tabel baru ini, lalu menjalankan `python manage.py migrate` agar Django benar-benar membuat tabel tersebut di database SQLite (lokal) maupun PostgreSQL (production).
+
+---
+
+# Tugas 3
+
+## Deskripsi Proyek
+Melanjutkan proyek portofolio pada Tugas 2, saya melakukan refactoring seluruh halaman HTML agar melakukan extend terhadap satu template dasar (`base.html`), sehingga navbar dan footer tidak perlu ditulis ulang di setiap halaman. Saya juga menerapkan mekanisme form dan data delivery penuh (create, update, delete, dan JSON) untuk bagian Experience, melengkapi fitur yang sudah lebih dulu diterapkan pada Projects di Tutorial 3.
+
+Sebagai tambahan keamanan, saya menerapkan proteksi password sederhana pada form create, update, dan delete, setelah data project saya sempat dihapus oleh orang lain karena portofolio belum memiliki sistem autentikasi.
+
+## Struktur Halaman
+- Profile (statis, berisi bio, skills)
+- Projects → MVT + Form (create, delete, search, JSON)
+- Experience → MVT + Form (create, **update**, delete, JSON)
+
+## Weekly Progress
+
+**14-16 September 2026**
+- Menyelesaikan Tutorial 3 (skeleton `base.html`, form & delete Project, JSON delivery).
+- Menambahkan proteksi password sederhana untuk fitur create/delete setelah data project sempat dihapus orang lain.
+
+**17-19 September 2026**
+- Mengerjakan Individual Assignment 3 dengan menambahkan fitur create, update, dan delete untuk Experience.
+- Membuat `ExperienceForm` dan halaman form terpisah untuk tambah/edit Experience.
+- Menambahkan endpoint JSON untuk Experience dan menerapkan deserialize di `show_experience`.
+- Menambahkan gambar (thumbnail) pada halaman Experience dan Projects melalui Google Drive.
+
+## AI Disclosure & Usage
+Pada Tugas 3, saya menggunakan Claude untuk membantu memahami konsep skeleton template (`extends base.html`), pembuatan form update yang menggunakan instance dari data yang sudah ada, serta cara kerja serialize dan deserialize JSON di Django. Saya juga bertanya bagaimana membuat modal konfirmasi sederhana menggunakan elemen HTML `<dialog>` tanpa perlu library JavaScript tambahan, serta cara menambahkan proteksi password pada form create dan delete agar tidak sembarang orang bisa mengubah data portofolio saya.
+Berikut beberapa contoh percakapan yang saya gunakan selama proses pengerjaan Tugas 3:
+
+**Prompt:** "kok abis hapus proyek malah pop up muncul disini bukan pas masukin pw"  
+**Claude:** Menjelaskan cara membuat modal `<dialog>` otomatis terbuka kembali saat password salah, dengan menambahkan atribut `{% if password_error %}open{% endif %}` pada tag dialog.
+
+**Prompt:** "gimana biar form update bisa ambil data yang udah ada buat diedit"  
+**Claude:** Menjelaskan penggunaan parameter `instance=experience` saat membuat `ExperienceForm`, sehingga form otomatis terisi dengan data lama dan `form.save()` akan mengupdate data yang sama, bukan membuat baru.
+
+**Prompt:** "kok pas tambah proyek gak ada pop up masukin password"  
+**Claude:** Menemukan bahwa field password belum ditambahkan sama sekali di form Tambah Project, sehingga `request.POST.get("edit_password")` selalu bernilai kosong dan validasi selalu gagal.
+
+Saya tetap memeriksa setiap kode yang diberikan dan menyesuaikannya dengan struktur project saya sendiri, terutama karena beberapa bagian model saya (seperti tipe `id`) berbeda dari contoh di tutorial.
+
+## Pertanyaan Reflektif
+
+### Tugas 3
+
+1. Kita menggunakan `ModelForm` alih-alih form HTML manual karena `ModelForm` otomatis menghasilkan field input sesuai struktur model, termasuk validasi tipe data (misalnya `URLField` otomatis validasi format URL). Ini menghemat waktu dan mengurangi resiko kesalahan dibanding menulis validasi manual satu per satu. `{% csrf_token %}` wajib ditambahkan karena Django membutuhkan token ini untuk memverifikasi bahwa request POST benar-benar berasal dari form yang di-render oleh server, bukan dari pihak ketiga yang mencoba mengirim request palsu (Cross-Site Request Forgery). Tanpa token ini, form akan ditolak dengan error 403 Forbidden.
+
+2. JSON lebih disukai karena strukturnya lebih ringkas dibanding XML (tidak perlu closing tag untuk setiap elemen), sehingga ukuran datanya lebih kecil dan lebih cepat diproses. JSON juga native dengan JavaScript, bahasa yang paling umum dipakai di sisi frontend, sehingga proses parsing menjadi sangat mudah. Hampir semua bahasa pemrograman modern juga sudah punya dukungan bawaan untuk JSON, membuatnya jadi pilihan standar untuk REST API saat ini.
+
+3. Ketika fungsi view dipanggil untuk mengembalikan data dalam bentuk JSON, alurnya dimulai dari query ke database menggunakan `Model.objects.all()` atau `.filter()`, yang menghasilkan queryset berisi objek-objek Python (instance model Django). Objek-objek ini tidak bisa langsung dikirim sebagai response HTTP karena bukan format teks yang bisa dibaca browser atau aplikasi lain. Di sinilah proses serialization diperlukan: `serializers.serialize("json", queryset)` mengubah objek Python tadi menjadi string JSON yang terstruktur. Hasil string ini kemudian dibungkus dalam `HttpResponse` dengan `content_type="application/json"` supaya browser/client tahu bahwa isinya adalah data JSON, bukan HTML biasa.
