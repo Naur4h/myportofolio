@@ -163,6 +163,16 @@ Sebagai tambahan keamanan, saya menerapkan proteksi password sederhana pada form
 
 ## AI Disclosure & Usage
 Pada Tugas 3, saya menggunakan Claude untuk membantu memahami konsep skeleton template (`extends base.html`), pembuatan form update yang menggunakan instance dari data yang sudah ada, serta cara kerja serialize dan deserialize JSON di Django. Saya juga bertanya bagaimana membuat modal konfirmasi sederhana menggunakan elemen HTML `<dialog>` tanpa perlu library JavaScript tambahan, serta cara menambahkan proteksi password pada form create dan delete agar tidak sembarang orang bisa mengubah data portofolio saya.
+Berikut beberapa contoh percakapan yang saya gunakan selama proses pengerjaan Tugas 3:
+
+**Prompt:** "kok abis hapus proyek malah pop up muncul disini bukan pas masukin pw"
+**Claude:** Menjelaskan cara membuat modal `<dialog>` otomatis terbuka kembali saat password salah, dengan menambahkan atribut `{% if password_error %}open{% endif %}` pada tag dialog.
+
+**Prompt:** "gimana biar form update bisa ambil data yang udah ada buat diedit"
+**Claude:** Menjelaskan penggunaan parameter `instance=experience` saat membuat `ExperienceForm`, sehingga form otomatis terisi dengan data lama dan `form.save()` akan mengupdate data yang sama, bukan membuat baru.
+
+**Prompt:** "kok pas tambah proyek gak ada pop up masukin password"
+**Claude:** Menemukan bahwa field password belum ditambahkan sama sekali di form Tambah Project, sehingga `request.POST.get("edit_password")` selalu bernilai kosong dan validasi selalu gagal.
 
 Saya tetap memeriksa setiap kode yang diberikan dan menyesuaikannya dengan struktur project saya sendiri, terutama karena beberapa bagian model saya (seperti tipe `id`) berbeda dari contoh di tutorial.
 
