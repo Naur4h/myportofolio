@@ -1,5 +1,7 @@
 import uuid
 from django.db import models
+from django.contrib.auth.models import User
+
 
 class Experience(models.Model):
     EXPERIENCE_CHOICES = [
@@ -26,6 +28,7 @@ class Experience(models.Model):
     def is_ongoing(self):
         return self.ended_at is None
 
+
 class Project(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -34,6 +37,12 @@ class Project(models.Model):
     demo_url = models.URLField(blank=True, null=True)
     thumbnail = models.URLField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    # Tambahkan field berikut: satu proyek bisa di-star banyak pengguna,
+    # dan satu pengguna bisa mem-star banyak proyek
+    starred_by = models.ManyToManyField(
+        User, related_name="starred_projects", blank=True
+    )
 
     def __str__(self):
         return self.title

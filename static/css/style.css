@@ -105,15 +105,15 @@ body {
     padding: 0.9rem 1rem;
 }
 
-.navbar .menu {
-    list-style: none;
+.navbar {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     gap: 1.5rem;
 }
 
-.navbar .menu a {
+.navbar a {
     text-decoration: none;
     color: var(--maroon);
     font-family: "Lexend", sans-serif;
@@ -122,9 +122,19 @@ body {
     transition: color 0.2s ease;
 }
 
-.navbar .menu a:hover {
+.navbar a:hover {
     color: #ffffff;
 }
+
+.navbar .nav-user {
+    color: var(--maroon-light);
+    font-family: "Lexend", sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+
+
 
 /* PROFILE ------------------------------------------------------------------------------------------------- */
 .hero {
@@ -186,7 +196,8 @@ body {
     color: #ffffff;
     text-shadow: 2px 2px 0px #d16c85;
     margin-bottom: 1.25rem;
-    word-break: break-word;
+    word-break: normal;
+    overflow-wrap: normal;
 }
 
 .bio {
@@ -424,7 +435,7 @@ body {
         max-width: none;
     }
 
-    .navbar .menu {
+        .navbar {
         gap: 2.5rem;
     }
 
@@ -555,8 +566,9 @@ body {
     border-radius: 12px;
     display: flex;
     flex-direction: column;
+    gap: 0.75rem;
+   
 }
-
 
 
 .projects-page-card h2 {
@@ -616,6 +628,13 @@ body {
     font-size: 0.85rem;
     margin-top: 0.35rem;
     font-weight: 600;
+}
+
+.form-help {
+    font-family: "Lexend", sans-serif;
+    color: var(--maroon);
+    font-size: 0.85rem;
+    margin-top: 0.35rem;
 }
 .button {
     display: inline-block;
@@ -875,4 +894,30 @@ body {
     font: inherit;
     background-color: #fffaf5;
     color: var(--maroon);
+}
+.button-star {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: #fdf1d6;
+    color: var(--maroon);
+    border: 2px dashed #e8b44a;
+}
+
+.button-star:hover {
+    background-color: #f6dfa3;
+}
+
+.button-star.is-starred {
+    background-color: #f0b429;
+    color: var(--maroon);
+    border: 2px dashed #c98a1a;
+}
+
+.button-star.is-starred:hover {
+    background-color: #e0a41f;
+}
+
+.star-count {
+    font-weight: 700;
 }

@@ -8,10 +8,12 @@
             <div class="container">
                 <div class="project-header">
                     <h1>Projects</h1>
+                    {% if user.is_superuser %}
                     <a href="{% url 'main:create_project' %}" class="button project-add-button">
                         <span aria-hidden="true">+</span>
                         Tambah Proyek
                     </a>
+                    {% endif %}
                 </div>
 
                 <form method="get" action="{% url 'main:show_projects' %}" class="project-search">
@@ -41,31 +43,51 @@
                                     <a href="{{ project.demo_url }}" target="_blank" class="pill-btn pill-btn-alt">Demo</a>
                                 {% endif %}
                             </div>
-                            
-                            <button type="button" class="button button-danger project-card-delete-trigger" onclick="document.getElementById('delete-modal-{{ project.id }}').showModal()">
-                                Hapus Proyek
-                            </button>
+
+                            {% include "components/project_star.html" with project=project %}
+
+                            {% if user.is_superuser %}
+                                <button type="button"
+                                        class="button button-danger project-card-delete-trigger"
+                                        onclick="document.getElementById('delete-modal-{{ project.id }}').showModal()">
+                                    Hapus Proyek
+                                </button>
 
                                 <dialog id="delete-modal-{{ project.id }}" class="delete-modal">
                                     <form method="post" action="{% url 'main:delete_project' project.id %}">
                                         {% csrf_token %}
+
                                         <h3>Yakin ingin menghapus proyek ini?</h3>
                                         <p>{{ project.title }}</p>
-                                        <input type="password" name="edit_password" placeholder="Masukkan password" required class="delete-password-input">
+
+                                        <input type="password"
+                                            name="edit_password"
+                                            placeholder="Masukkan password"
+                                            required
+                                            class="delete-password-input">
+
                                         <div class="delete-modal-actions">
-                                            <button type="button" class="button button-secondary" onclick="document.getElementById('delete-modal-{{ project.id }}').close()">Tidak</button>
-                                            <button type="submit" class="button button-danger">Ya, Hapus</button>
+                                            <button type="button"
+                                                    class="button button-secondary"
+                                                    onclick="document.getElementById('delete-modal-{{ project.id }}').close()">
+                                                Tidak
+                                            </button>
+
+                                            <button type="submit" class="button button-danger">
+                                                Ya, Hapus
+                                            </button>
                                         </div>
                                     </form>
                                 </dialog>
+                            {% endif %}
                         </article>
-                                {% empty %}
-                                    {% if title_query %}
-                                        <p class="empty-state">Tidak ada proyek dengan nama tersebut.</p>
-                                    {% else %}
-                                        <p class="empty-state">Belum ada project yang ditambahkan.</p>
-                                    {% endif %}
-                                {% endfor %}
+                    {% empty %}
+                        {% if title_query %}
+                            <p class="empty-state">Tidak ada proyek dengan nama tersebut.</p>
+                        {% else %}
+                            <p class="empty-state">Belum ada project yang ditambahkan.</p>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </section>
