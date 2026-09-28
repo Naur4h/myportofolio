@@ -914,3 +914,12 @@ body {
         text-overflow: ellipsis;
     }
 }
+
+.form-help ul {
+    padding-left: 1.4rem;
+    margin-top: 0.35rem;
+}
+
+.form-help li {
+    margin-bottom: 0.2rem;
+}
