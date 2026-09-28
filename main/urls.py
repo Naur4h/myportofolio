@@ -1,11 +1,11 @@
 from django.urls import path
 
-
 from main.views import (
     show_main,
     show_experience,
     show_projects,
     create_project,
+    update_project,
     delete_project,
     toggle_star,
     get_projects_json,
@@ -29,6 +29,7 @@ urlpatterns = [
     path("api/experience/", get_experience_json, name="get_experience_json"),
     path("projects/", show_projects, name="show_projects"),
     path("projects/add/", create_project, name="create_project"),
+    path("projects/<int:project_id>/edit/", update_project, name="update_project"),
     path("projects/<int:project_id>/delete/", delete_project, name="delete_project"),
     path("projects/<int:project_id>/star/", toggle_star, name="toggle_star"),
     path("api/projects/", get_projects_json, name="get_projects_json"),

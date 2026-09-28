@@ -46,6 +46,12 @@
 
                             {% include "components/project_star.html" with project=project %}
 
+                            {% if user.is_superuser or is_editor %}
+                                <a href="{% url 'main:update_project' project.id %}" class="button button-secondary project-card-edit-trigger">
+                                    Edit Proyek
+                                </a>
+                            {% endif %}
+
                             {% if user.is_superuser %}
                                 <button type="button"
                                         class="button button-danger project-card-delete-trigger"

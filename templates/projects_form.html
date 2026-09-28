@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block meta %}
-    <title>Add Project - {{ name }}</title>
+    <title>{% if project %}Edit Project{% else %}Add Project{% endif %} - {{ name }}</title>
 {% endblock meta %}
 {% block content %}
     <main>
         <section class="projects-page">
             <div class="container">
-                <h1>Add New Project</h1>
+                <h1>{% if project %}Edit Project{% else %}Add New Project{% endif %}</h1>
                 <form method="post"
-                      action="{% url 'main:create_project' %}"
+                      action="{% if project %}{% url 'main:update_project' project.id %}{% else %}{% url 'main:create_project' %}{% endif %}"
                       class="project-form"
                       id="add-project-form">
                     {% csrf_token %}
@@ -25,13 +25,13 @@
                     <button type="button"
                             class="button"
                             onclick="document.getElementById('add-project-modal').showModal()">
-                        Tambah Project
+                        {% if project %}Simpan Perubahan{% else %}Tambah Project{% endif %}
                     </button>
                     <a href="{% url 'main:show_projects' %}" class="button button-secondary">Batal</a>
                 </form>
 
                 <dialog id="add-project-modal" class="delete-modal" {% if password_error %}open{% endif %}>
-                    <h3>Yakin ingin menambahkan proyek ini?</h3>
+                    <h3>{% if project %}Yakin ingin menyimpan perubahan proyek ini?{% else %}Yakin ingin menambahkan proyek ini?{% endif %}</h3>
                     <div class="form-group">
                         <label for="edit_password">Password Edit</label>
                         <input type="password"
@@ -46,7 +46,7 @@
                     </div>
                     <div class="delete-modal-actions">
                         <button type="button" class="button button-secondary" onclick="document.getElementById('add-project-modal').close()">Tidak</button>
-                        <button type="submit" form="add-project-form" class="button">Ya, Tambah</button>
+                        <button type="submit" form="add-project-form" class="button">{% if project %}Ya, Simpan{% else %}Ya, Tambah{% endif %}</button>
                     </div>
                 </dialog>
             </div>

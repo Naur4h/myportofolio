@@ -31,7 +31,6 @@ body {
     color: var(--ink);
     background-color: var(--paper);
     line-height: 1.6;
-    overflow-x: hidden;
 }
 
 /* efek LOPE LOPE ------------------------------------------------------------------------------------------- */
@@ -103,9 +102,6 @@ body {
     border: 3px dashed #fffaf5;
     box-shadow: 5px 5px 0px rgba(169, 68, 42, 0.25);
     padding: 0.9rem 1rem;
-}
-
-.navbar {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -132,9 +128,6 @@ body {
     font-weight: 600;
     font-size: 0.9rem;
 }
-
-
-
 
 /* PROFILE ------------------------------------------------------------------------------------------------- */
 .hero {
@@ -163,9 +156,6 @@ body {
     aspect-ratio: 1 / 1;
     display: block;
     object-fit: contain;
-    border-radius: 0;
-    border: none;
-    box-shadow: none;
     transition: transform 0.3s ease;
 }
 
@@ -334,6 +324,7 @@ body {
     gap: 0.6rem;
     margin-bottom: 1.25rem;
 }
+
 .skill-icon-svg {
     width: 28px;
     height: 28px;
@@ -367,7 +358,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* Shared: buttons used on Projects (static-free) page ---------------------------------------------------- */
+/* Shared: pill buttons on Projects / Experience cards ---------------------------------------------------- */
 .project-links {
     display: flex;
     gap: 0.75rem;
@@ -417,10 +408,6 @@ body {
         gap: 2.5rem;
     }
 
-    .hero-photo {
-        flex-shrink: 0;
-    }
-
     .hero-text {
         flex: 1;
         min-width: 0;
@@ -435,7 +422,7 @@ body {
         max-width: none;
     }
 
-        .navbar {
+    .navbar {
         gap: 2.5rem;
     }
 
@@ -536,6 +523,15 @@ body {
     color: var(--maroon);
 }
 
+.experience-card .project-links {
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.experience-card .project-card-delete-trigger {
+    margin-top: 0;
+}
+
 /* PROJECTS PAGE (dinamis) ------------------------------------------------------------------------------------ */
 .projects-page {
     padding: 3.5rem 0;
@@ -567,9 +563,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-   
 }
-
 
 .projects-page-card h2 {
     margin: 0.3rem 0;
@@ -588,98 +582,6 @@ body {
     color: #6b6459;
     margin-bottom: 1rem;
     flex-grow: 1;
-}
-
-.project-form {
-    width: 100%;
-    max-width: 500px;
-    margin: 1.5rem auto 0;
-}
-
-.form-group {
-    margin-bottom: 1.25rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-weight: 700;
-    color: var(--maroon);
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0.7rem;
-    border: 2px dashed var(--teal);
-    border-radius: var(--radius);
-    font: inherit;
-    background-color: #fffaf5;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: 2px solid var(--pink-dark);
-}
-
-.form-error {
-    color: #b42318;
-    font-size: 0.85rem;
-    margin-top: 0.35rem;
-    font-weight: 600;
-}
-
-.form-help {
-    font-family: "Lexend", sans-serif;
-    color: var(--maroon);
-    font-size: 0.85rem;
-    margin-top: 0.35rem;
-}
-.button {
-    display: inline-block;
-    border: 0;
-    border-radius: 25px;
-    padding: 0.65rem 1.5rem;
-    background: var(--teal);
-    color: var(--maroon);
-    cursor: pointer;
-    font: inherit;
-    font-weight: 700;
-    text-decoration: none;
-    box-shadow: 0 3px 0px rgba(0,0,0,0.2);
-    transition: transform 0.15s ease, background-color 0.2s ease;
-}
-
-.button-secondary {
-    background: var(--teal);
-    color: var(--maroon);
-    border: none;
-    margin-left: 10px;
-}
-
-.button:hover {
-    background: #d16c85;
-    color: #ffffff;
-    transform: translateY(-2px);
-}
-
-.button-secondary:hover {
-    background: #b3c7c6;
-}
-
-.button-danger {
-    background: #b42318;
-    color: #ffffff;
-    border-radius: 999px;
-    padding: 0.6rem 1.5rem;
-    font-size: 0.85rem;
-    box-shadow: 0 3px 0px rgba(0,0,0,0.2);
-}
-
-.button-danger:hover {
-    background: #6b100a;
-    transform: translateY(-2px);
 }
 
 .project-header {
@@ -705,22 +607,6 @@ body {
     margin-bottom: 0.75rem;
 }
 
-.project-delete-form {
-    margin-top: 0.75rem;
-}
-
-@media (max-width: 600px) {
-    .project-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .project-add-button {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
 .project-search {
     display: flex;
     gap: 0.75rem;
@@ -736,64 +622,165 @@ body {
     font: inherit;
 }
 
-.project-search .button {
-    background: var(--teal);
-    color: var(--maroon);
-}
-
-.project-search .button:hover {
-    background: #d16c85;
-    color: #ffffff;
-}
-
-.project-add-button {
-    background: var(--teal);
-    color: var(--maroon);
-}
-
-.project-add-button:hover {
-    background: #d16c85;
-    color: #ffffff;
-}
-
 .project-search__input:focus {
     outline: 2px solid var(--teal);
 }
 
-@media (max-width: 600px) {
-    .project-header {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.75rem;
-    }
-
-    .project-header h1 {
-        margin-bottom: 0.25rem;
-    }
+.project-card-delete-trigger {
+    margin-top: 0.75rem;
+    width: 100%;
 }
 
+/* FORM ------------------------------------------------------------------------------------------------------- */
+.project-form {
+    width: 100%;
+    max-width: 500px;
+    margin: 1.5rem auto 0;
+}
 
-.delete-password-input {
-    padding: 0.6rem;
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 700;
+    color: var(--maroon);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.7rem;
     border: 2px dashed var(--teal);
     border-radius: var(--radius);
-    background: #fffaf5;
     font: inherit;
+    background-color: #fffaf5;
 }
 
-.alert-message {
-    margin: 1rem 0;
+.form-group select {
+    color: var(--maroon);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: 2px solid var(--pink-dark);
+}
+
+.form-error {
+    color: #b42318;
+    font-size: 0.85rem;
+    margin-top: 0.35rem;
     font-weight: 600;
 }
 
-
-.alert-error {
-    color: #b42318;
+.form-help {
+    font-family: "Lexend", sans-serif;
+    color: var(--maroon);
+    font-size: 0.85rem;
+    margin-top: 0.35rem;
 }
 
-.alert-success {
-    color: #1e6b3c;
+/* Teks & link di bawah form login/register */
+.experience-section .container > p,
+.projects-page .container > p {
+    font-family: "Lexend", sans-serif;
+    font-weight: 500;
+    color: var(--maroon);
+    margin-top: 1.25rem;
 }
+
+.experience-section .container > p a,
+.projects-page .container > p a {
+    color: var(--maroon);
+    font-weight: 700;
+    text-decoration: underline dashed;
+    text-underline-offset: 4px;
+    transition: color 0.2s ease;
+}
+
+.experience-section .container > p a:hover,
+.projects-page .container > p a:hover {
+    color: #ffffff;
+}
+
+/* BUTTONS ---------------------------------------------------------------------------------------------------- */
+.button {
+    display: inline-block;
+    border: 0;
+    border-radius: 25px;
+    padding: 0.65rem 1.5rem;
+    background: var(--teal);
+    color: var(--maroon);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 3px 0px rgba(0,0,0,0.2);
+    transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.button:hover {
+    background: #d16c85;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* Tombol "Batal" di samping tombol submit form */
+.project-form .button-secondary {
+    margin-left: 10px;
+}
+
+.button-secondary:hover {
+    background: #b3c7c6;
+    color: var(--maroon);
+}
+
+.button-danger {
+    background: #b42318;
+    color: #ffffff;
+    border-radius: 999px;
+    padding: 0.6rem 1.5rem;
+    font-size: 0.85rem;
+}
+
+.button-danger:hover {
+    background: #6b100a;
+    color: #ffffff;
+}
+
+/* STAR ------------------------------------------------------------------------------------------------------- */
+.button-star {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: #fdf1d6;
+    color: var(--maroon);
+    border: 2px dashed #e8b44a;
+}
+
+.button-star:hover {
+    background-color: #f6dfa3;
+    color: var(--maroon);
+}
+
+.button-star.is-starred {
+    background-color: #f0b429;
+    border: 2px dashed #c98a1a;
+}
+
+.button-star.is-starred:hover {
+    background-color: #e0a41f;
+}
+
+.star-count {
+    font-weight: 700;
+}
+
+/* MODAL (hapus / konfirmasi password / feedback) ------------------------------------------------------------- */
 .delete-modal {
     position: fixed;
     top: 50%;
@@ -839,10 +826,8 @@ body {
     margin-bottom: 1rem;
 }
 
-
 .delete-password-input {
     width: 100%;
-    box-sizing: border-box;
     padding: 0.7rem;
     border: 2px dashed var(--teal);
     border-radius: var(--radius);
@@ -863,11 +848,6 @@ body {
     padding: 0.65rem 1rem;
 }
 
-.project-card-delete-trigger {
-    margin-top: 0.75rem;
-    width: 100%;
-}
-
 .feedback-success {
     color: #1e6b3c;
 }
@@ -876,48 +856,39 @@ body {
     color: #b42318;
 }
 
-.experience-card .project-links {
-    margin-top: 0.75rem;
-    margin-bottom: 0.5rem;
-}
+/* RESPONSIVE HP (<= 600px) ---------------------------------------------------------------------------------- */
+@media (max-width: 600px) {
+    .project-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
 
-.experience-card .project-card-delete-trigger {
-    margin-top: 0;
-}
+    .project-header h1 {
+        margin-bottom: 0.25rem;
+    }
 
-.form-group select {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0.7rem;
-    border: 2px dashed var(--teal);
-    border-radius: var(--radius);
-    font: inherit;
-    background-color: #fffaf5;
-    color: var(--maroon);
-}
-.button-star {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    background-color: #fdf1d6;
-    color: var(--maroon);
-    border: 2px dashed #e8b44a;
-}
+    .project-add-button {
+        width: 100%;
+        justify-content: center;
+    }
 
-.button-star:hover {
-    background-color: #f6dfa3;
-}
+    /* Navbar tetap satu baris */
+    .navbar {
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        padding: 0.7rem 0.8rem;
+    }
 
-.button-star.is-starred {
-    background-color: #f0b429;
-    color: var(--maroon);
-    border: 2px dashed #c98a1a;
-}
+    .navbar a,
+    .navbar .nav-user {
+        font-size: 0.68rem;
+        white-space: nowrap;
+    }
 
-.button-star.is-starred:hover {
-    background-color: #e0a41f;
-}
-
-.star-count {
-    font-weight: 700;
+    .navbar .nav-user {
+        max-width: 70px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }

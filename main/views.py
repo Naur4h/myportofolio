@@ -29,7 +29,6 @@ def show_main(request):
     }
     return render(request, "index.html", context)
 
-
 def show_experience(request):
     json_response = get_experience_json(request)
 
@@ -42,6 +41,7 @@ def show_experience(request):
     context = {
         "name": "Naurah Claradinda",
         "experience_list": experiences,
+        "is_editor": is_editor(request.user),
     }
     return render(request, "experience.html", context)
 
@@ -50,8 +50,11 @@ def get_experience_json(request):
     experience_json = serializers.serialize("json", experiences)
     return HttpResponse(experience_json, content_type="application/json")
 
-
+@login_required(login_url="/login/")
 def create_experience(request):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+
     form = ExperienceForm(request.POST or None)
     password_error = None
 
@@ -71,7 +74,11 @@ def create_experience(request):
     return render(request, "experience_form.html", context)
 
 
+@login_required(login_url="/login/")
 def update_experience(request, experience_id):
+    if not (request.user.is_superuser or is_editor(request.user)):
+        raise PermissionDenied
+
     experience = get_object_or_404(Experience, pk=experience_id)
     form = ExperienceForm(request.POST or None, instance=experience)
     password_error = None
@@ -93,7 +100,11 @@ def update_experience(request, experience_id):
     return render(request, "experience_form.html", context)
 
 
+@login_required(login_url="/login/")
 def delete_experience(request, experience_id):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+
     experience = get_object_or_404(Experience, pk=experience_id)
 
     if request.method == "POST":
@@ -106,6 +117,8 @@ def delete_experience(request, experience_id):
         return redirect("main:show_experience")
 
     return redirect("main:show_experience")
+
+
 def get_projects_json(request):
     title_query = request.GET.get("title", "").strip()
     projects = Project.objects.all()
@@ -128,10 +141,16 @@ def show_projects(request):
     projects = [project.object for project in projects]
     title_query = request.GET.get("title", "").strip()
 
+    is_editor = (
+        request.user.is_authenticated
+        and request.user.groups.filter(name="Editor").exists()
+    )
+
     context = {
         "name": "Naurah Claradinda",
         "project_list": projects,
         "title_query": title_query,
+        "is_editor": is_editor,
     }
     return render(request, "projects.html", context)
 
@@ -158,8 +177,38 @@ def create_project(request):
     }
     return render(request, "projects_form.html", context)
 
+
+@login_required(login_url="/login/")
+def update_project(request, project_id):
+    # Superuser dan Editor sama-sama boleh mengubah data
+    is_editor = request.user.groups.filter(name="Editor").exists()
+    if not (request.user.is_superuser or is_editor):
+        raise PermissionDenied
+
+    project = get_object_or_404(Project, pk=project_id)
+    form = ProjectForm(request.POST or None, instance=project)
+    password_error = None
+
+    if request.method == "POST":
+        if request.POST.get("edit_password") != os.getenv("EDIT_PASSWORD"):
+            password_error = "Password salah!"
+        elif form.is_valid():
+            form.save()
+            messages.success(request, "Proyek berhasil diperbarui!")
+            return redirect("main:show_projects")
+
+    context = {
+        "name": "Naurah Claradinda",
+        "form": form,
+        "password_error": password_error,
+        "project": project,
+    }
+    return render(request, "projects_form.html", context)
+
+
 @login_required(login_url="/login/")
 def delete_project(request, project_id):
+    # Hanya superuser (pemilik portofolio) yang boleh menghapus
     if not request.user.is_superuser:
         raise PermissionDenied
 
@@ -225,3 +274,8 @@ def logout_user(request):
     response = redirect("main:show_main")
     response.delete_cookie('last_login')
     return response
+
+
+
+def is_editor(user):
+    return user.is_authenticated and user.groups.filter(name="Editor").exists()
