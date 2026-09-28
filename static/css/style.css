@@ -894,21 +894,22 @@ body {
         justify-content: center;
     }
 
-    /* Navbar tetap satu baris */
+    /* Navbar tetap satu baris, ukuran ikut lebar layar */
     .navbar {
         flex-wrap: nowrap;
-        gap: 0.5rem;
-        padding: 0.7rem 0.8rem;
+        justify-content: space-evenly;
+        gap: 0.4rem;
+        padding: 0.8rem 0.6rem;
     }
 
     .navbar a,
     .navbar .nav-user {
-        font-size: 0.68rem;
+        font-size: clamp(0.62rem, 3.3vw, 0.85rem);
         white-space: nowrap;
     }
 
     .navbar .nav-user {
-        max-width: 70px;
+        max-width: 5.5em;
         overflow: hidden;
         text-overflow: ellipsis;
     }
