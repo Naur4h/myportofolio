@@ -780,6 +780,27 @@ body {
     font-weight: 700;
 }
 
+/* Tombol aksi di kartu: selebar kartu, ukuran sama */
+.projects-page-card > .button,
+.projects-page-card > .star-form .button,
+.experience-card > .button,
+.experience-card .project-links .button {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.85rem;
+    padding: 0.6rem 1.5rem;
+}
+
+/* Border dashed Star menambah tinggi 4px, jadi padding dikurangi supaya tinggi sama */
+.projects-page-card > .star-form .button {
+    padding-block: calc(0.6rem - 2px);
+}
+
+/* Jarak sudah diatur gap kartu, jadi margin tambahan dibuang */
+.projects-page-card > .project-card-delete-trigger {
+    margin-top: 0;
+}
+
 /* MODAL (hapus / konfirmasi password / feedback) ------------------------------------------------------------- */
 .delete-modal {
     position: fixed;
