@@ -185,3 +185,83 @@ Saya tetap memeriksa setiap kode yang diberikan dan menyesuaikannya dengan struk
 2. JSON lebih disukai karena strukturnya lebih ringkas dibanding XML (tidak perlu closing tag untuk setiap elemen), sehingga ukuran datanya lebih kecil dan lebih cepat diproses. JSON juga native dengan JavaScript, bahasa yang paling umum dipakai di sisi frontend, sehingga proses parsing menjadi sangat mudah. Hampir semua bahasa pemrograman modern juga sudah punya dukungan bawaan untuk JSON, membuatnya jadi pilihan standar untuk REST API saat ini.
 
 3. Ketika fungsi view dipanggil untuk mengembalikan data dalam bentuk JSON, alurnya dimulai dari query ke database menggunakan `Model.objects.all()` atau `.filter()`, yang menghasilkan queryset berisi objek-objek Python (instance model Django). Objek-objek ini tidak bisa langsung dikirim sebagai response HTTP karena bukan format teks yang bisa dibaca browser atau aplikasi lain. Di sinilah proses serialization diperlukan: `serializers.serialize("json", queryset)` mengubah objek Python tadi menjadi string JSON yang terstruktur. Hasil string ini kemudian dibungkus dalam `HttpResponse` dengan `content_type="application/json"` supaya browser/client tahu bahwa isinya adalah data JSON, bukan HTML biasa.
+
+# Tugas 4
+
+## Deskripsi Proyek
+
+Melanjutkan proyek portofolio pada Tugas 3, pada Tugas 4 saya menambahkan sistem autentikasi dan otorisasi menggunakan fitur bawaan Django. Pengguna sekarang dapat melakukan register, login, dan logout. Saya juga menyimpan informasi `last_login` pada cookie dan menampilkannya pada halaman Profile.
+
+Pada bagian Projects, saya menerapkan empat tingkat hak akses, yaitu pengunjung yang belum login, pengguna biasa, Editor, dan superuser. Pengunjung yang belum login hanya dapat melihat project. Pengguna biasa dapat melihat project dan menggunakan fitur star/unstar. Editor memiliki hak pengguna biasa serta dapat mengubah data project. Sementara itu, superuser sebagai pemilik portofolio memiliki akses penuh untuk membuat, mengubah, dan menghapus project.
+
+Role Editor dibuat menggunakan Django Group. Pemeriksaan hak akses dilakukan pada sisi server menggunakan `@login_required`, pengecekan `is_superuser`, serta pengecekan keanggotaan group. Jika pengguna mencoba mengakses fitur yang tidak sesuai dengan hak aksesnya, sistem akan memberikan HTTP 403 Forbidden.
+
+Saya juga menambahkan fitur star pada Project menggunakan `ManyToManyField` yang terhubung dengan model User. Pengguna yang sudah login dapat memberikan atau membatalkan star pada project. Jumlah star juga ditampilkan pada setiap kartu project.
+
+Selain itu, endpoint JSON pada `/api/projects/` diperbarui menggunakan `use_natural_foreign_keys` sehingga data pengguna yang memberikan star ditampilkan menggunakan username, bukan ID pengguna.
+
+## Struktur Halaman
+
+**Profile**
+Halaman Profile berisi informasi pribadi, bio, skills, serta status login terakhir pengguna.
+
+**Projects**
+Halaman Projects menggunakan MVT dan Form. Fitur yang tersedia meliputi:
+
+* create
+* update
+* delete
+* search
+* JSON
+* star/unstar
+* pembatasan hak akses berdasarkan role
+
+**Experience**
+Halaman Experience menggunakan MVT dan Form dengan fitur create, update, delete, dan JSON.
+
+**Login / Register / Logout**
+Pengguna dapat membuat akun baru, melakukan login, dan logout menggunakan sistem autentikasi bawaan Django.
+
+## Weekly Progress
+
+### 22–24 September 2026
+
+Menyelesaikan Tutorial 4 yang mencakup register, login, logout, cookie `last_login`, serta pembatasan fitur create dan delete Project untuk superuser.
+
+Saya juga menambahkan fitur star menggunakan `ManyToManyField`, sehingga pengguna yang sudah login dapat memberikan atau membatalkan star pada Project.
+
+Selain itu, saya memperbaiki serializer JSON agar menggunakan `use_natural_foreign_keys`, sehingga data `starred_by` menampilkan username pengguna, bukan ID pengguna.
+
+### 25–26 September 2026
+
+Mengerjakan Individual Assignment 4 dengan menambahkan role Editor menggunakan Django Group.
+
+Saya menambahkan view `update_project` dan template edit agar Editor dapat mengubah data Project, tetapi tetap tidak dapat melakukan create dan delete.
+
+Saya juga menyesuaikan `projects.html` agar tombol Tambah, Edit, Hapus, dan Star hanya muncul sesuai dengan hak akses masing-masing pengguna.
+
+Setelah itu, saya melakukan pengujian terhadap beberapa kondisi, yaitu pengunjung tanpa login, pengguna biasa, Editor, dan superuser. Saya juga memastikan bahwa pengguna yang tidak memiliki hak akses akan mendapatkan HTTP 403 ketika mencoba mengakses fitur tersebut secara langsung melalui URL.
+
+## AI Disclosure & Usage
+
+Pada Tugas 4, saya menggunakan Claude sebagai alat bantu untuk memahami dan mengimplementasikan beberapa fitur Django. Fitur yang saya pelajari dengan bantuan AI meliputi autentikasi bawaan Django, penggunaan cookie untuk menyimpan `last_login`, penerapan role menggunakan Django Group, penggunaan `PermissionDenied`, serta fitur star menggunakan `ManyToManyField`.
+
+Saya juga menggunakan AI untuk memahami cara menggunakan satu template form untuk kebutuhan tambah dan edit Project sehingga tidak perlu membuat template yang berbeda untuk setiap fungsi.
+
+Beberapa contoh pertanyaan yang saya gunakan selama proses pengerjaan Tugas 4 antara lain:
+
+**Prompt:** “Bagaimana alur autentikasi bawaan Django menggunakan `AuthenticationForm` dan `UserCreationForm`, dan bagaimana cara menggunakannya pada fitur login dan register?”
+
+**Prompt:** “Bagaimana cara membuat role Editor menggunakan Django Group sehingga Editor dapat mengubah Project tetapi tidak dapat membuat atau menghapus Project?”
+
+**Prompt:** “Bagaimana cara membuat fitur star pada Project menggunakan `ManyToManyField` yang terhubung dengan User?”
+
+**Prompt:** “Bagaimana cara membuat satu `projects_form.html` yang dapat digunakan untuk tambah dan edit Project?”
+
+Saya tetap memeriksa dan menyesuaikan kode yang diberikan dengan struktur project saya sendiri. Penyesuaian dilakukan pada nama variabel, URL, template, model, dan bagian lain yang berbeda dengan contoh dari AI. Setelah diterapkan, kode juga saya jalankan dan uji untuk memastikan fitur dapat bekerja sesuai dengan kebutuhan tugas.
+
+Dengan demikian, AI saya gunakan sebagai alat bantu untuk memahami konsep dan mencari solusi ketika mengalami kendala, sedangkan hasil akhirnya tetap saya sesuaikan dan uji pada project yang saya kerjakan.
+
+## Pertanyaan Reflektif
+
+Pertanyaan reflektif untuk pekan ini dihilangkan sesuai instruksi tugas.
