@@ -83,7 +83,9 @@ body {
     max-width: 1000px;
     margin: 0 auto;
 }
-
+.hide {
+    display: none !important;
+}
 /* Header / Navbar --------------------------------------------------------------------------------------- */
 .site-header {
     padding: 1rem 0;
@@ -550,7 +552,7 @@ body {
 
 .projects-page-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 1rem;
     min-height: 150px;
 }
@@ -783,6 +785,7 @@ body {
 /* Tombol aksi di kartu: selebar kartu, ukuran sama */
 .projects-page-card > .button,
 .projects-page-card > .star-form .button,
+.projects-page-card > form .button,
 .experience-card > .button,
 .experience-card .project-links .button {
     width: 100%;
@@ -922,4 +925,151 @@ body {
 
 .form-help li {
     margin-bottom: 0.2rem;
+}
+
+/* toast */
+.toast-component {
+    position: fixed;
+    inset: auto 2rem 2rem auto;
+    margin: 0;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 4px 4px 0px rgba(169, 68, 42, 0.25);
+    display: none;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    background-color: #fffaf5;
+    border: 2px dashed var(--teal);
+    color: var(--maroon);
+    max-width: 320px;
+}
+
+.toast-component:popover-open {
+    display: flex;
+}
+
+.toast-hidden {
+    opacity: 0;
+    transform: translateY(150%);
+    pointer-events: none;
+}
+
+.toast-show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.15rem;
+    font-family: "Lexend", sans-serif;
+    color: var(--maroon);
+}
+
+.toast-message {
+    font-size: 0.85rem;
+    color: #6b6459;
+}
+
+/* Modifikasi border kiri berdasarkan tipe notifikasi */
+.toast-success { border-left: 4px solid #22c55e; }
+.toast-error { border-left: 4px solid #b42318; }
+.toast-normal { border-left: 4px solid var(--accent); }
+
+
+.project-form-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 1rem;
+    border: 0;
+    background: transparent;
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-form-modal:popover-open {
+    display: flex;
+}
+
+.project-form-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    background: rgba(28, 25, 23, 0.58);
+    cursor: default;
+}
+
+.project-form-modal__content {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 640px);
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    padding: 1.5rem;
+    background: #fffaf5;
+    border: 2px dashed var(--teal);
+    border-radius: 16px;
+    box-shadow: 6px 6px 0px rgba(169, 68, 42, 0.3);
+}
+
+.project-form-modal__content h2 {
+    margin: 0 2.5rem 1.25rem 0;
+    font-family: "Lexend", sans-serif;
+    font-size: 1.5rem;
+    color: var(--maroon);
+}
+
+.project-form-modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--maroon-light);
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.project-form-modal__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 600px) {
+    .project-form-modal {
+        align-items: flex-end;
+        padding: 0;
+    }
+
+    .project-form-modal__content {
+        width: 100%;
+        max-height: 90vh;
+        padding: 1.25rem;
+        border-radius: 16px 16px 0 0;
+    }
+
+    .project-form-modal__actions {
+        flex-direction: column-reverse;
+    }
+
+    .project-form-modal__actions .button {
+        width: 100%;
+        text-align: center;
+    }
 }

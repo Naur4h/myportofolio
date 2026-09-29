@@ -8,9 +8,9 @@
             <div class="container">
                 <h1>{% if project %}Edit Project{% else %}Add New Project{% endif %}</h1>
                 <form method="post"
-                      action="{% if project %}{% url 'main:update_project' project.id %}{% else %}{% url 'main:create_project' %}{% endif %}"
-                      class="project-form"
-                      id="add-project-form">
+                    action="{% if project %}{% url 'main:update_project' project.id %}{% else %}{% url 'main:create_project' %}{% endif %}"
+                    class="project-form"
+                    onsubmit="return confirm('{% if project %}Yakin ingin menyimpan perubahan proyek ini?{% else %}Yakin ingin menambahkan proyek ini?{% endif %}');">
                     {% csrf_token %}
                     {% for field in form %}
                         <div class="form-group">
@@ -22,33 +22,11 @@
                         </div>
                     {% endfor %}
 
-                    <button type="button"
-                            class="button"
-                            onclick="document.getElementById('add-project-modal').showModal()">
+                    <button type="submit" class="button">
                         {% if project %}Simpan Perubahan{% else %}Tambah Project{% endif %}
                     </button>
                     <a href="{% url 'main:show_projects' %}" class="button button-secondary">Batal</a>
                 </form>
-
-                <dialog id="add-project-modal" class="delete-modal" {% if password_error %}open{% endif %}>
-                    <h3>{% if project %}Yakin ingin menyimpan perubahan proyek ini?{% else %}Yakin ingin menambahkan proyek ini?{% endif %}</h3>
-                    <div class="form-group">
-                        <label for="edit_password">Password Edit</label>
-                        <input type="password"
-                            name="edit_password"
-                            id="edit_password"
-                            form="add-project-form"
-                            required
-                            class="delete-password-input">
-                        {% if password_error %}
-                            <p class="form-error">{{ password_error }}</p>
-                        {% endif %}
-                    </div>
-                    <div class="delete-modal-actions">
-                        <button type="button" class="button button-secondary" onclick="document.getElementById('add-project-modal').close()">Tidak</button>
-                        <button type="submit" form="add-project-form" class="button">{% if project %}Ya, Simpan{% else %}Ya, Tambah{% endif %}</button>
-                    </div>
-                </dialog>
             </div>
         </section>
     </main>
