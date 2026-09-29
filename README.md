@@ -265,3 +265,73 @@ Dengan demikian, AI saya gunakan sebagai alat bantu untuk memahami konsep dan me
 ## Pertanyaan Reflektif
 
 Pertanyaan reflektif untuk pekan ini dihilangkan sesuai instruksi tugas.
+
+# Tugas 5
+
+## Deskripsi Proyek
+
+Melanjutkan proyek portofolio pada Tugas 4, saya menerapkan pola JavaScript dari Tutorial 5, seperti AJAX, debouncing, modal, toast, dan proteksi XSS pada bagian Experience. Pada tutorial, pola tersebut hanya diterapkan pada Projects.
+
+Data Experience sekarang ditampilkan menggunakan `fetch()` dari endpoint JSON dengan `JsonResponse`. Fitur pencarian dapat dilakukan tanpa reload dengan debouncing 300ms. Penambahan Experience dilakukan melalui modal (Popover API) dan dikirim menggunakan Fetch API. Data divalidasi kembali di server melalui `create_experience_ajax`, termasuk pengecekan `is_superuser` dan token CSRF.
+
+Saya juga menambahkan toast untuk kondisi berhasil dan gagal. Untuk proteksi XSS, saya menggunakan escaping pada JavaScript sebelum data dimasukkan ke `innerHTML`, serta `strip_tags` pada `clean_title` dan `clean_description` di `ExperienceForm`.
+
+## Struktur Halaman
+
+* Profile → bio, skills, dan status login terakhir
+* Projects → MVT + AJAX, search debounce, tambah via modal, star, hak akses, dan proteksi XSS
+* Experience → MVT + AJAX, search debounce, tambah via modal, hak akses, dan proteksi XSS
+* Login / Register / Logout
+
+## Weekly Progress
+
+**29 September 2026**
+
+* Menyelesaikan Tutorial 5 pada Projects, termasuk toast, AJAX, search, modal tambah proyek, Fetch API, dan proteksi XSS.
+* Menghapus sisa penggunaan `edit_password` pada create/update/delete Projects dan menggantinya dengan pengecekan role dari Tugas 4.
+
+**30 September 2026**
+
+* Menerapkan pola AJAX dari Projects ke Experience.
+* Menambahkan AJAX untuk menampilkan dan mencari Experience.
+* Menambahkan modal tambah Experience dan view `create_experience_ajax` dengan validasi `ModelForm` dan response JSON 201/400/403.
+* Menambahkan proteksi XSS pada JavaScript dan `ExperienceForm`.
+* Menguji hak akses pengunjung, pengguna biasa, editor, dan superuser.
+
+## AI Disclosure & Usage
+
+Pada Tugas 5, saya menggunakan Claude untuk membantu menerapkan pola AJAX dari Tutorial 5 ke bagian Experience, seperti `fetch`, debouncing, modal, toast, dan proteksi XSS.
+
+Saya juga bertanya tentang cara menangani primary key Experience yang menggunakan UUID, karena berbeda dengan Project yang menggunakan integer saat membuat URL edit dan delete secara dinamis di JavaScript.
+
+Beberapa contoh penggunaan AI:
+
+**Prompt:** "ttp g muncul masih sm kek tdi"
+Terkait validasi XSS pada Experience yang tidak berjalan.
+
+**Claude:** Menemukan bahwa `clean_title` masih berada di `ProjectForm`, bukan `ExperienceForm`, sehingga validasi pada Experience belum berjalan.
+
+**Prompt:** "eh btw ini ini kegdean jg nih, samain aj kek project gw lupa cssny"
+Terkait ukuran tombol pada kartu Experience.
+
+**Claude:** Menambahkan selector `.experience-card > form .button` agar tombol Hapus mengikuti ukuran tombol lainnya.
+
+Saya tetap memeriksa dan menyesuaikan kode yang diberikan dengan struktur project saya, terutama karena Experience menggunakan UUID sebagai primary key.
+
+## Pertanyaan Reflektif
+
+### Tugas 5
+
+**1. Mengapa debouncing digunakan pada pencarian AJAX?**
+
+Debouncing menunda request sampai pengguna berhenti mengetik selama waktu tertentu, misalnya 300ms. Tanpa debouncing, setiap huruf dapat mengirim request baru. Hal ini membuat request menjadi terlalu banyak dan dapat membebani server. Dengan debouncing, request hanya dikirim setelah pengguna selesai mengetik.
+
+**2. Mengapa menggunakan `await` pada `fetch()`?**
+
+`await` digunakan untuk menunggu sampai `fetch()` selesai sebelum response diproses. Karena `fetch()` berjalan secara asynchronous, tanpa `await` kode berikutnya dapat berjalan sebelum data dari server diterima. Dengan `await`, alurnya menjadi `kirim request → tunggu response → proses data`.
+
+**3. Apa itu XSS dan mengapa perlu escaping?**
+
+XSS adalah serangan dengan memasukkan kode HTML atau JavaScript berbahaya ke halaman web. Data dari Django template biasanya sudah di-escape otomatis, tetapi data yang dimasukkan ke `innerHTML` melalui JavaScript perlu di-escape secara manual. Karena itu, pada project ini saya menggunakan escaping di JavaScript dan `strip_tags` pada `ExperienceForm` sebagai proteksi tambahan.
+
+
