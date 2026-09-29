@@ -482,7 +482,7 @@ body {
 
 .experience-section .experience-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 1rem;
 }
 
@@ -787,7 +787,8 @@ body {
 .projects-page-card > .star-form .button,
 .projects-page-card > form .button,
 .experience-card > .button,
-.experience-card .project-links .button {
+.experience-card .project-links .button,
+.experience-card > form .button {
     width: 100%;
     justify-content: center;
     font-size: 0.85rem;

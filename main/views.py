@@ -31,49 +31,73 @@ def show_main(request):
     return render(request, "index.html", context)
 
 def show_experience(request):
-    json_response = get_experience_json(request)
-
-    experiences = serializers.deserialize(
-        "json",
-        json_response.content.decode("utf-8"),
-    )
-    experiences = [exp.object for exp in experiences]
+    title_query = request.GET.get("title", "").strip()
 
     context = {
         "name": "Naurah Claradinda",
-        "experience_list": experiences,
+        "title_query": title_query,
         "is_editor": is_editor(request.user),
+        "form": ExperienceForm(),
     }
     return render(request, "experience.html", context)
 
 def get_experience_json(request):
-    experiences = Experience.objects.all()
-    experience_json = serializers.serialize("json", experiences)
-    return HttpResponse(experience_json, content_type="application/json")
+    title_query = request.GET.get("title", "").strip()
+    experiences = Experience.objects.all().order_by("-started_at")
 
+    if title_query:
+        experiences = experiences.filter(title__icontains=title_query)
+
+    data = []
+    for experience in experiences:
+        data.append({
+            "pk": str(experience.id),
+            "fields": {
+                "title": experience.title,
+                "description": experience.description,
+                "category": experience.category,
+                "category_display": experience.get_category_display(),
+                "thumbnail": experience.thumbnail,
+                "is_ongoing": experience.is_ongoing,
+            }
+        })
+
+    return JsonResponse(data, safe=False)
 @login_required(login_url="/login/")
 def create_experience(request):
     if not request.user.is_superuser:
         raise PermissionDenied
 
     form = ExperienceForm(request.POST or None)
-    password_error = None
 
-    if request.method == "POST":
-        if request.POST.get("edit_password") != os.getenv("EDIT_PASSWORD"):
-            password_error = "Password salah!"
-        elif form.is_valid():
-            form.save()
-            messages.success(request, "Pengalaman baru berhasil ditambahkan!")
-            return redirect("main:show_experience")
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Pengalaman baru berhasil ditambahkan!")
+        return redirect("main:show_experience")
 
     context = {
         "name": "Naurah Claradinda",
         "form": form,
-        "password_error": password_error,
     }
     return render(request, "experience_form.html", context)
 
+@require_POST
+def create_experience_ajax(request):
+    if not request.user.is_superuser:
+        return JsonResponse(
+            {"message": "Hanya pemilik portofolio yang dapat menambahkan pengalaman."},
+            status=403,
+        )
+
+    form = ExperienceForm(request.POST)
+    if form.is_valid():
+        experience = form.save()
+        return JsonResponse(
+            {"message": "Pengalaman berhasil ditambahkan.", "pk": str(experience.id)},
+            status=201,
+        )
+
+    return JsonResponse({"errors": form.errors.get_json_data()}, status=400)
 
 @login_required(login_url="/login/")
 def update_experience(request, experience_id):
@@ -82,20 +106,15 @@ def update_experience(request, experience_id):
 
     experience = get_object_or_404(Experience, pk=experience_id)
     form = ExperienceForm(request.POST or None, instance=experience)
-    password_error = None
 
-    if request.method == "POST":
-        if request.POST.get("edit_password") != os.getenv("EDIT_PASSWORD"):
-            password_error = "Password salah!"
-        elif form.is_valid():
-            form.save()
-            messages.success(request, "Pengalaman berhasil diperbarui!")
-            return redirect("main:show_experience")
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Pengalaman berhasil diperbarui!")
+        return redirect("main:show_experience")
 
     context = {
         "name": "Naurah Claradinda",
         "form": form,
-        "password_error": password_error,
         "experience": experience,
     }
     return render(request, "experience_form.html", context)
@@ -109,16 +128,11 @@ def delete_experience(request, experience_id):
     experience = get_object_or_404(Experience, pk=experience_id)
 
     if request.method == "POST":
-        if request.POST.get("edit_password") != os.getenv("EDIT_PASSWORD"):
-            messages.error(request, "Password salah!")
-            return redirect("main:show_experience")
-
         experience.delete()
         messages.success(request, "Pengalaman berhasil dihapus!")
         return redirect("main:show_experience")
 
     return redirect("main:show_experience")
-
 
 def get_projects_json(request):
     title_query = request.GET.get("title", "").strip()
@@ -160,6 +174,7 @@ def show_projects(request):
         "form": ProjectForm(),
     }
     return render(request, "projects.html", context)
+
 @login_required(login_url="/login/")
 def create_project(request):
     if not request.user.is_superuser:
